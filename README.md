@@ -19,3 +19,6 @@ I wish I could easily change the color of these LEDs
 2. Ability to Create timed Show files and a cue list
 3. Ability to create light groups of similar but different addressed fixtures
 4. Sound activated mode
+
+*DMX512 (Digital Multiplex) is a standard for digital communication networks that are commonly used to control stage lighting and effects. (From https://en.wikipedia.org/wiki/DMX512)*
+
