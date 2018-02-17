@@ -1,0 +1,12 @@
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\bin\Debug\LCS.exe.config
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\bin\Debug\LCS.exe
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\bin\Debug\LCS.pdb
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.csprojResolveAssemblyReference.cache
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Properties.Resources.resources
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.csproj.GenerateResource.Cache
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.csproj.CoreCompileInputs.cache
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.exe
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.pdb
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Gui.InputForm.resources
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Gui.MainForm.resources
+C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Test.resources
