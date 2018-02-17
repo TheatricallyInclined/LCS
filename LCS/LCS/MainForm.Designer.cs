@@ -43,7 +43,7 @@
             this.ClientSize = formSize;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            //this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.AutoScroll = true;

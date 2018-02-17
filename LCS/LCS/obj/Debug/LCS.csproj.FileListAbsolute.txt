@@ -9,4 +9,3 @@ C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.exe
 C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.pdb
 C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Gui.InputForm.resources
 C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Gui.MainForm.resources
-C:\Users\laven\Desktop\cse442\project\LCS\LCS\obj\Debug\LCS.Test.resources

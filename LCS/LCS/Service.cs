@@ -109,12 +109,12 @@ namespace LCS.Logic
         public System.Drawing.Size mainFormSize()
         {
             int componentNumVertical = (numOfChannels / NUMOFCOMPONENTINONELINE)+1;
+            int componentNumHorizon = componentNumVertical > 1 ? NUMOFCOMPONENTINONELINE : numOfChannels % NUMOFCOMPONENTINONELINE;
             //if number of components is multiple of 15, minus the vertical line by 1
-            if(numOfChannels % NUMOFCOMPONENTINONELINE == 0)
+            if (numOfChannels % NUMOFCOMPONENTINONELINE == 0)
             {
                 componentNumVertical--;
             }
-            int componentNumHorizon = componentNumVertical > 0 ? NUMOFCOMPONENTINONELINE : numOfChannels % NUMOFCOMPONENTINONELINE;
             //the height of one component is 194px, plus 20px padding
             //the width of one component is 56px + 20px padding between two components
             return new System.Drawing.Size((componentNumHorizon * (20+56)) + 15, componentNumVertical * (194) + 20);
