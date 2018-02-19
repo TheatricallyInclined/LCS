@@ -1,0 +1,7 @@
+Utilizing USB to DMX converters built by Enttec due to them being the most open source
+https://www.enttec.com/us/range/controls/dmx-usb/
+
+Found a few C# DMX protocols on the internet that could be useful to us
+https://archive.codeplex.com/?p=quickdmx
+https://github.com/hansvana/DMXtable
+https://github.com/agrath/Sniper.Lighting.Dmx
