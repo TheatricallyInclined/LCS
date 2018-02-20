@@ -29,6 +29,8 @@ namespace LCS.Gui
 
         private Point namePoint;
 
+        private int id;
+
         private const int PADDING = 20;
 
         private const int TRACKBARHEIGHT = 125;
@@ -56,7 +58,8 @@ namespace LCS.Gui
         public Component(Control.ControlCollection control, int id)
         {
             this.control = control;
-            calculatePoints(id);
+            this.id = id;
+            calculatePoints();
             generateComponent();
         }
 
@@ -165,11 +168,13 @@ namespace LCS.Gui
             name = new System.Windows.Forms.TextBox();
             this.name.BackColor = System.Drawing.Color.WhiteSmoke;
             this.name.Location = namePoint;
+            this.name.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //this.name.MaxLength = 3;
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(NAMEWIDTH, 22);
             this.name.TabIndex = 0;
             this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.name.Text = "CH " + Convert.ToString(id);
             this.control.Add(name);
         }
 
@@ -198,7 +203,7 @@ namespace LCS.Gui
         /*
          * Calculate the location of all parts in this component
          */
-        private void calculatePoints(int id)
+        private void calculatePoints()
         {
             int componentNumVertical = id / 15;
             int componentNumHorizon = id % 15;

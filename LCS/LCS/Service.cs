@@ -106,6 +106,9 @@ namespace LCS.Logic
             return false;
         }
 
+        /*
+         * Calculates the main form size by number of channels that user input
+         */
         public System.Drawing.Size mainFormSize()
         {
             int componentNumVertical = (numOfChannels / NUMOFCOMPONENTINONELINE)+1;
