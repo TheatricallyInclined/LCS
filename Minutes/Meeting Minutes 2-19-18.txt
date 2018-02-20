@@ -16,6 +16,6 @@ Zack: Found Open Source USB to DMX (Enttec)
 Rong: Base GUI
 
 Plan to Accomplish: 
-Alex: Update Main GUI 
+Alex: Update Main GUI, Update README
 Zack: Find USB libraries to utilize 
 Rong: GUI Additions for Form Page
