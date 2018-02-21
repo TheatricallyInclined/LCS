@@ -38,7 +38,25 @@ namespace LCS.Gui
          */
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            this.warningLabel.Visible = false;
+            this.nameWarningLabel.Visible = false;
+        }
+
+        /*
+         * Text box Evenhandler
+         * hide warning message if text in the box changed.
+         */
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            this.addressWarningLabel.Visible = false;
+        }
+
+        /*
+         * Text box Evenhandler
+         * hide warning message if text in the box changed.
+         */
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            this.channelWarningLabel.Visible = false;
         }
 
         /*
@@ -47,7 +65,9 @@ namespace LCS.Gui
          */
         private void InputForm_Click(object sender, EventArgs e)
         {
-            this.warningLabel.Visible = false;
+            this.channelWarningLabel.Visible = false;
+            this.nameWarningLabel.Visible = false;
+            this.addressWarningLabel.Visible = false;
         }
 
         /*
@@ -58,15 +78,21 @@ namespace LCS.Gui
          */
         private void inputButton_Click(object sender, EventArgs e)
         {
-            //check and set channels
-            if (service.setChannels(this.input.Text))
+            if (!service.setName(this.fixtureName.Text))
             {
-                service.startMain(this.input.Text);
+                this.nameWarningLabel.Visible = true;
             }
-            else
+
+            if (!service.setAddress(this.startAddress.Text))
             {
-                this.warningLabel.Visible = true;
+                this.addressWarningLabel.Visible = true;
             }
+
+            if (!service.setChannels(this.channels.Text))
+            {
+                this.channelWarningLabel.Visible = true;
+            }
+            service.startMain();
         }
     }
 }

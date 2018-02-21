@@ -34,57 +34,135 @@
         /// </summary>
         private void InitializeInputBox()
         {
-            this.input = new System.Windows.Forms.TextBox();
-            this.inputLabel = new System.Windows.Forms.Label();
+            this.fixtureName = new System.Windows.Forms.TextBox();
+            this.startAddress = new System.Windows.Forms.TextBox();
+            this.channels = new System.Windows.Forms.TextBox();
+            this.inputLabel1 = new System.Windows.Forms.Label();
+            this.inputLabel2 = new System.Windows.Forms.Label();
+            this.inputLabel3 = new System.Windows.Forms.Label();
             this.inputButton = new System.Windows.Forms.Button();
-            this.warningLabel = new System.Windows.Forms.Label();
+            this.channelWarningLabel = new System.Windows.Forms.Label();
+            this.nameWarningLabel = new System.Windows.Forms.Label();
+            this.addressWarningLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // inputBox
+            // fixture name inputBox
             // 
-            this.input.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.input.Location = new System.Drawing.Point(145, 70);
-            this.input.MaxLength = 3;
-            this.input.Name = "input";
-            this.input.Size = new System.Drawing.Size(80, 22);
-            this.input.TabIndex = 0;
-            this.input.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.input.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.AcceptButton = inputButton;
+            this.fixtureName.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.fixtureName.Location = new System.Drawing.Point(264, 20);
+            this.fixtureName.MaxLength = 3;
+            this.fixtureName.Name = "fixtureName";
+            this.fixtureName.Size = new System.Drawing.Size(80, 22);
+            this.fixtureName.TabIndex = 0;
+            this.fixtureName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.fixtureName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // startAddress inputBox
+            // 
+            this.startAddress.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.startAddress.Location = new System.Drawing.Point(270, 70);
+            this.startAddress.MaxLength = 3;
+            this.startAddress.Name = "fixtureName";
+            this.startAddress.Size = new System.Drawing.Size(80, 22);
+            this.startAddress.TabIndex = 0;
+            this.startAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.startAddress.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // channels inputBox
+            // 
+            this.channels.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.channels.Location = new System.Drawing.Point(300, 120);
+            this.channels.MaxLength = 3;
+            this.channels.Name = "fixtureName";
+            this.channels.Size = new System.Drawing.Size(80, 22);
+            this.channels.TabIndex = 0;
+            this.channels.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.channels.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+
             // 
             // input button
             // 
             this.inputButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputButton.Location = new System.Drawing.Point(255, 69);
+            this.inputButton.Location = new System.Drawing.Point(180, 170);
             this.inputButton.Name = "button1";
-            this.inputButton.Size = new System.Drawing.Size(80, 28);
+            this.inputButton.Size = new System.Drawing.Size(100, 35);
             this.inputButton.TabIndex = 0;
             this.inputButton.Text = "Enter";
             this.inputButton.UseVisualStyleBackColor = true;
             this.inputButton.Click += new System.EventHandler(this.inputButton_Click);
+            this.AcceptButton = inputButton;
             // 
-            // inputLabel
+            // inputLabel1
             // 
-            this.inputLabel.AutoSize = true;
-            this.inputLabel.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.inputLabel.Location = new System.Drawing.Point(20, 20);
-            this.inputLabel.Name = "inputLabel";
-            this.inputLabel.Size = new System.Drawing.Size(423, 30);
-            this.inputLabel.TabIndex = 1;
-            this.inputLabel.Text = "Please enter the number of channels you need: ";
+            this.inputLabel1.AutoSize = true;
+            this.inputLabel1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.inputLabel1.Location = new System.Drawing.Point(107, 20);
+            this.inputLabel1.Name = "inputLabel1";
+            this.inputLabel1.Size = new System.Drawing.Size(200, 30);
+            this.inputLabel1.TabIndex = 1;
+            this.inputLabel1.Text = "Fixture name: ";
+
             // 
-            // warningLabel
+            // inputLabel2
             // 
-            this.warningLabel.AutoSize = true;
-            this.warningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.warningLabel.ForeColor = System.Drawing.Color.Red;
-            this.warningLabel.Location = new System.Drawing.Point(90, 105);
-            this.warningLabel.Name = "warningLabel";
-            this.warningLabel.Size = new System.Drawing.Size(273, 30);
-            this.warningLabel.TabIndex = 1;
-            this.warningLabel.Text = "Please enter a valid number between 0 and " + service.getMaxChannels().ToString();
-            this.warningLabel.Visible = false;
+            this.inputLabel2.AutoSize = true;
+            this.inputLabel2.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputLabel2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.inputLabel2.Location = new System.Drawing.Point(100, 70);
+            this.inputLabel2.Name = "inputLabel2";
+            this.inputLabel2.Size = new System.Drawing.Size(200, 30);
+            this.inputLabel2.TabIndex = 1;
+            this.inputLabel2.Text = "Start address: ";
+
+            // 
+            // inputLabel3
+            // 
+            this.inputLabel3.AutoSize = true;
+            this.inputLabel3.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputLabel3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.inputLabel3.Location = new System.Drawing.Point(80, 120);
+            this.inputLabel3.Name = "inputLabel3";
+            this.inputLabel3.Size = new System.Drawing.Size(200, 30);
+            this.inputLabel3.TabIndex = 1;
+            this.inputLabel3.Text = "Number of channels: ";
+
+            // 
+            // channel warningLabel
+            // 
+            this.channelWarningLabel.AutoSize = true;
+            this.channelWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.channelWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.channelWarningLabel.Location = new System.Drawing.Point(88, 150);
+            this.channelWarningLabel.Name = "channelWarningLabel";
+            this.channelWarningLabel.Size = new System.Drawing.Size(273, 30);
+            this.channelWarningLabel.TabIndex = 1;
+            this.channelWarningLabel.Text = "Please enter a valid number between 0 and " + service.getMaxChannels().ToString();
+            this.channelWarningLabel.Visible = false;
+            // 
+            // name warningLabel
+            // 
+            this.nameWarningLabel.AutoSize = true;
+            this.nameWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.nameWarningLabel.Location = new System.Drawing.Point(125, 50);
+            this.nameWarningLabel.Name = "nameWarningLabel";
+            this.nameWarningLabel.Size = new System.Drawing.Size(273, 30);
+            this.nameWarningLabel.TabIndex = 1;
+            this.nameWarningLabel.Text = "Please enter a valid fixture name";
+            this.nameWarningLabel.Visible = false;
+            // 
+            // address warningLabel
+            // 
+            this.addressWarningLabel.AutoSize = true;
+            this.addressWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addressWarningLabel.ForeColor = System.Drawing.Color.Red;
+            this.addressWarningLabel.Location = new System.Drawing.Point(88, 100);
+            this.addressWarningLabel.Name = "addressWarningLabel";
+            this.addressWarningLabel.Size = new System.Drawing.Size(273, 30);
+            this.addressWarningLabel.TabIndex = 1;
+            this.addressWarningLabel.Text = "Please enter a valid address between 0 and " + service.getMaxAddress().ToString();
+            this.addressWarningLabel.Visible = false;
             // 
             // InputForm
             // 
@@ -92,11 +170,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             //this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(50)))));
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(475, 135);
-            this.Controls.Add(this.inputLabel);
-            this.Controls.Add(this.input);
+            this.ClientSize = new System.Drawing.Size(475, 225);
+            this.Controls.Add(this.inputLabel1);
+            this.Controls.Add(this.inputLabel2);
+            this.Controls.Add(this.inputLabel3);
+            this.Controls.Add(this.fixtureName);
+            this.Controls.Add(this.startAddress);
+            this.Controls.Add(this.channels);
             this.Controls.Add(this.inputButton);
-            this.Controls.Add(this.warningLabel);
+            this.Controls.Add(this.channelWarningLabel);
+            this.Controls.Add(this.nameWarningLabel);
+            this.Controls.Add(this.addressWarningLabel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InputForm";
@@ -110,9 +194,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox input;
-        private System.Windows.Forms.Label inputLabel;
+        private System.Windows.Forms.TextBox fixtureName;
+        private System.Windows.Forms.TextBox startAddress;
+        private System.Windows.Forms.TextBox channels;
+        private System.Windows.Forms.Label inputLabel1;
+        private System.Windows.Forms.Label inputLabel2;
+        private System.Windows.Forms.Label inputLabel3;
         private System.Windows.Forms.Button inputButton;
-        private System.Windows.Forms.Label warningLabel;
+        private System.Windows.Forms.Label channelWarningLabel;
+        private System.Windows.Forms.Label nameWarningLabel;
+        private System.Windows.Forms.Label addressWarningLabel;
     }
 }

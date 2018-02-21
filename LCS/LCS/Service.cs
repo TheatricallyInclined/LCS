@@ -27,14 +27,30 @@ namespace LCS.Logic
         /*
          * The total numbers of channels
          */
-        private int numOfChannels;
+        private int numOfChannels = -1;
 
         /*
-         * The maximum possible channels can have in this app
+         * The maximum possible channels can have in this device
          */
-        private const int MAXCHANNELS = 100;
+        private const int MAX_CHANNELS = 512;
 
         private const int NUMOFCOMPONENTINONELINE = 15;
+
+        /*
+         * Starting address of this application
+         */
+        private int startAddress = -1;
+
+        /*
+         * Maxinum address can the device have
+         */
+        private const int MAX_ADDRESS = 200;
+
+        /*
+         * Fixture name
+         */
+        private String fixtureName = null;
+
 
         /*
          * Constructor class
@@ -58,7 +74,13 @@ namespace LCS.Logic
         /*
          * Hide the input form and open the main form
          */
-        public void startMain(String input) {
+        public void startMain() {
+            if(this.fixtureName == null || this.startAddress == -1 || this.numOfChannels == -1)
+            {
+                //if any input is not valid, return
+                return;
+            }
+            //if all inputs are valid
             inputForm.Hide();
             mainForm = new Gui.MainForm(this, numOfChannels);
             //when closing the main form, closes the input form
@@ -78,7 +100,7 @@ namespace LCS.Logic
             int channels;
             bool valid = int.TryParse(inputChannels, out channels);
             // check if the input is valid
-            if (valid && channels > 0 && MAXCHANNELS >= channels)
+            if (valid && channels > 0 && MAX_CHANNELS >= channels)
             {
                 this.numOfChannels = channels;
                 return true;
@@ -87,20 +109,35 @@ namespace LCS.Logic
         }
 
         /*
-         * Check if the input string is a valid numeric value within 
-         * the range of 0 and max channels
+         * Check if the input string is a valid start address
          * 
-         * set the numOfChannels if the input is valid and return true, 
+         * set the start address if the input is valid and return true, 
          * otherwise return false
          */
-        public bool checkChannels(String inputChannels)
+        public bool setAddress(String inputAddress)
         {
-            int channels;
-            bool valid = int.TryParse(inputChannels, out channels);
+            int address;
+            bool valid = int.TryParse(inputAddress, out address);
             // check if the input is valid
-            if (valid && channels > 0 && MAXCHANNELS > channels)
+            if (valid && address > 0 && MAX_ADDRESS >= address)
             {
-                numOfChannels = channels;
+                this.startAddress = address;
+                return true;
+            }
+            return false;
+        }
+
+        /*
+        * Check if the input string is a valid name
+        * 
+        * set the fixture name if the input is valid and return true, 
+        * otherwise return false
+        */
+        public bool setName(String name)
+        {
+            if(name != "")
+            {
+                this.fixtureName = name;
                 return true;
             }
             return false;
@@ -126,8 +163,9 @@ namespace LCS.Logic
         /*
          * getter method for maxChannels
          */
-        public int getMaxChannels() => MAXCHANNELS;
+        public int getMaxChannels() => MAX_CHANNELS;
 
+        public int getMaxAddress() => MAX_ADDRESS;
     }
 
 }
