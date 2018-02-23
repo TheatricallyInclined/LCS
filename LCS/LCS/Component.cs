@@ -29,6 +29,8 @@ namespace LCS.Gui
 
         private Point namePoint;
 
+        private int id;
+
         private const int PADDING = 20;
 
         private const int TRACKBARHEIGHT = 125;
@@ -41,7 +43,7 @@ namespace LCS.Gui
 
         private const int NAMEWIDTH = 45;
 
-        private const int TICKPADDING_X = 26;
+        private const int TICKPADDING_X = 25;
 
         private const int TICKPADDING_Y = 7;
 
@@ -56,7 +58,8 @@ namespace LCS.Gui
         public Component(Control.ControlCollection control, int id)
         {
             this.control = control;
-            calculatePoints(id);
+            this.id = id;
+            calculatePoints();
             generateComponent();
         }
 
@@ -85,8 +88,10 @@ namespace LCS.Gui
                 tickValue.AutoSize = true;
                 tickValue.Location = new Point(this.trackBarPoint.X + TICKPADDING_X, this.trackBarPoint.Y + TICKPADDING_Y + i * TICKSPACING);
                 tickValue.Font = new System.Drawing.Font("Times New Roman", 7.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                tickValue.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+                tickValue.ForeColor = System.Drawing.SystemColors.WindowText;
+                tickValue.BackColor = System.Drawing.SystemColors.ControlDark;
                 tickValue.Name = "tickLabel1";
+                tickValue.BorderStyle = BorderStyle.None;
                 tickValue.Size = new System.Drawing.Size(16, 17);
                 tickValue.TabIndex = 3;
                 tickValue.Text = Convert.ToString(255 - (i * 85));
@@ -117,6 +122,7 @@ namespace LCS.Gui
             this.trackBar.TabIndex = 0;
             this.trackBar.TickFrequency = 85;
             this.trackBar.Scroll += new EventHandler(this.trackBar1_Scroll);
+            this.trackBar.BackColor = System.Drawing.SystemColors.ControlDark;
             this.control.Add(this.trackBar);
             //end initialization
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
@@ -148,6 +154,9 @@ namespace LCS.Gui
                 0,
              0});
             this.numericUpDown.Name = "numericUpDown";
+            this.numericUpDown.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.numericUpDown.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.numericUpDown.BorderStyle = BorderStyle.None;
             this.numericUpDown.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.numericUpDown.Size = new System.Drawing.Size(NUMERICUPDOWNWIDTH, NUMERICUPDOWNHEIGHT);
             this.numericUpDown.TabIndex = 1;
@@ -165,11 +174,15 @@ namespace LCS.Gui
             name = new System.Windows.Forms.TextBox();
             this.name.BackColor = System.Drawing.Color.WhiteSmoke;
             this.name.Location = namePoint;
+            this.name.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             //this.name.MaxLength = 3;
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(NAMEWIDTH, 22);
+            this.name.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.name.BackColor = System.Drawing.SystemColors.ControlDark;
             this.name.TabIndex = 0;
             this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.name.Text = "CH " + Convert.ToString(id);
             this.control.Add(name);
         }
 
@@ -198,14 +211,14 @@ namespace LCS.Gui
         /*
          * Calculate the location of all parts in this component
          */
-        private void calculatePoints(int id)
+        private void calculatePoints()
         {
             int componentNumVertical = id / 15;
             int componentNumHorizon = id % 15;
             //calculate location of the trackBarPoint according to their id
             this.trackBarPoint = new Point(PADDING + (componentNumHorizon * TRACKBARWIDTH) + (PADDING * componentNumHorizon),
                 componentNumVertical * (TRACKBARHEIGHT + NUMERICUPDOWNHEIGHT + 5 + NUMERICUPDOWNHEIGHT + PADDING + 5)+ PADDING);
-            this.numerateUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + TRACKBARHEIGHT);
+            this.numerateUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + 1 + TRACKBARHEIGHT);
             this.namePoint = new Point(numerateUpDownPoint.X, numerateUpDownPoint.Y + NUMERICUPDOWNHEIGHT + 5);
         }
     }

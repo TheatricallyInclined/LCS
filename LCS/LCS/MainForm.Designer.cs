@@ -43,11 +43,29 @@
             this.ClientSize = formSize;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.AutoScroll = true;
         }
+        /*
+         * System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.ClientSize = formSize;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MainForm";
+            this.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+           this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.ResumeLayout(false);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.AutoScroll = true;
+         */
 
         /*
          * Generate components for the main form
