@@ -50,7 +50,6 @@
             // 
             this.fixtureName.BackColor = System.Drawing.Color.WhiteSmoke;
             this.fixtureName.Location = new System.Drawing.Point(264, 20);
-            this.fixtureName.MaxLength = 3;
             this.fixtureName.Name = "fixtureName";
             this.fixtureName.Size = new System.Drawing.Size(80, 22);
             this.fixtureName.TabIndex = 0;
