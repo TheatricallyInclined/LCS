@@ -185,7 +185,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "InputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form2";
+            this.Text = "InputForm";
             this.Click += new System.EventHandler(this.InputForm_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
