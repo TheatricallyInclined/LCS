@@ -12,7 +12,7 @@ using System.Windows.Forms;
 */
 namespace LCS.Gui
 {
-    class Component : Form
+    class Component : Panel
     {
 
         private System.Windows.Forms.TrackBar trackBar;
@@ -32,6 +32,8 @@ namespace LCS.Gui
         private int id;
 
         private const int PADDING = 20;
+
+        private const int PADDING_TOP = 50;
 
         private const int TRACKBARHEIGHT = 125;
 
@@ -213,11 +215,8 @@ namespace LCS.Gui
          */
         private void calculatePoints()
         {
-            int componentNumVertical = id / 15;
-            int componentNumHorizon = id % 15;
             //calculate location of the trackBarPoint according to their id
-            this.trackBarPoint = new Point(PADDING + (componentNumHorizon * TRACKBARWIDTH) + (PADDING * componentNumHorizon),
-                componentNumVertical * (TRACKBARHEIGHT + NUMERICUPDOWNHEIGHT + 5 + NUMERICUPDOWNHEIGHT + PADDING + 5)+ PADDING);
+            this.trackBarPoint = new Point((id + 1) * PADDING + id * TRACKBARWIDTH, PADDING_TOP);
             this.numerateUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + 1 + TRACKBARHEIGHT);
             this.namePoint = new Point(numerateUpDownPoint.X, numerateUpDownPoint.Y + NUMERICUPDOWNHEIGHT + 5);
         }
