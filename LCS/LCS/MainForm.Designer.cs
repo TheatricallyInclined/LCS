@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 
@@ -11,6 +12,11 @@ namespace LCS.Gui
     */
     partial class MainForm
     {
+        /*
+         * stores slider values and names
+         * data[*][0] stores value and data[*][1] stores name
+         */
+        private string[,] data;
 
         private Panel currentScenePanel;
 
@@ -22,9 +28,17 @@ namespace LCS.Gui
 
         private Panel addressPanel;
 
+        private TextBox transitionInputBox;
+
+        private Label transitionTimeWarningLabel;
+
         private const int PADDING = 20;
 
-        private Label currentSceneLabel;
+        private int scenePanelWidth;
+
+        private int SCENE_PANEL_HEIGHT = 225;
+
+        private const int OTHER_PANEL_WIDTH = 220;
 
         /// <summary>
         /// Required designer variable.
@@ -50,14 +64,15 @@ namespace LCS.Gui
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(System.Drawing.Size formSize)
+        private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.SuspendLayout();
             // 
             // MainForm
             // 
-            this.ClientSize = new System.Drawing.Size(1000, 510);
+            //this.ClientSize = new System.Drawing.Size(1000, 510);
+            this.ClientSize = this.service.mainFormSize();
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
@@ -91,6 +106,9 @@ namespace LCS.Gui
          */
         private void generateComponents(int numOfComponents)
         {
+            this.scenePanelWidth = this.service.scenePanelWidth();
+            this.data = new string[numOfComponents * 2, 2];
+            //generate main form
             generateCurrentScenePanel();
             generateNextScenePanel();
             generateGoPanel();
@@ -98,20 +116,25 @@ namespace LCS.Gui
             generateAddressPanel();
             generateAddFixtureButton();
             generateExitButton();
-            //this.coms = new Component[numOfComponents];
-            for(int i = 0; i < numOfComponents; i++)
+            //generate components in current and next panel
+            for (int i = 0; i < numOfComponents; i++)
             {
-                new Component(this.currentScenePanel.Controls, i);
-                new Component(this.nextScenePanel.Controls, i);
+                new Component(data, this.currentScenePanel.Controls, i);
+                new Component(data, this.nextScenePanel.Controls, i);
             }
+            new FixtureNameLabel(service, this.namePanel, service.getFxitureName(), service.nextFixtureId());
+            addStartAddress(service.getStartAddressAsString(), service.nextFixtureId());
+            //add data into fixture list
+            this.service.addData(data);
         }
 
         private void generateCurrentScenePanel()
         {
+            generateSceneTextPanel(new System.Drawing.Point(0, 0), "Current Scene");
             this.currentScenePanel = new System.Windows.Forms.Panel();
             this.currentScenePanel.SuspendLayout();
-            this.currentSceneLabel = new Label();
-
+            //this.currentScenePanel.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
+            //this.currentScenePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             // 
             // current scene panel
             // 
@@ -123,31 +146,19 @@ namespace LCS.Gui
             this.currentScenePanel.AutoScroll = true;
 
             this.currentScenePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.currentScenePanel.Location = new System.Drawing.Point(0, 0);
+            this.currentScenePanel.Location = new System.Drawing.Point(0, 30);
             this.currentScenePanel.Name = "currentScenePanel";
-            this.currentScenePanel.Size = new System.Drawing.Size(780, 255);
+            this.currentScenePanel.Size = new System.Drawing.Size(scenePanelWidth, SCENE_PANEL_HEIGHT);
             this.currentScenePanel.TabIndex = 0;
-            this.currentScenePanel.Click += new System.EventHandler(this.scroll_Click);
-            // 
-            // Current Scene Label
-            // 
-            currentSceneLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            currentSceneLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            currentSceneLabel.Location = new System.Drawing.Point(200, 20);
-            currentSceneLabel.Name = "currentSceneLabel";
-            currentSceneLabel.Size = new System.Drawing.Size(200, 30);
-            currentSceneLabel.TabIndex = 1;
-            currentSceneLabel.Text = "Current Scene";
             this.currentScenePanel.ResumeLayout(false);
-            this.currentScenePanel.Controls.Add(currentSceneLabel);
             this.Controls.Add(currentScenePanel);
         }
 
         private void generateNextScenePanel()
         {
+            generateSceneTextPanel(new System.Drawing.Point(0, 255), "Next Scene");
             this.nextScenePanel = new System.Windows.Forms.Panel();
             this.nextScenePanel.SuspendLayout();
-            Label nextSceneLabel = new Label();
 
             // 
             // current scene panel
@@ -160,24 +171,12 @@ namespace LCS.Gui
             this.nextScenePanel.AutoScroll = true;
 
             this.nextScenePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.nextScenePanel.Location = new System.Drawing.Point(0, 255);
+            this.nextScenePanel.Location = new System.Drawing.Point(0, 285);
             this.nextScenePanel.Name = "nextScenePanel";
-            this.nextScenePanel.Size = new System.Drawing.Size(780, 255);
+            this.nextScenePanel.Size = new System.Drawing.Size(scenePanelWidth, SCENE_PANEL_HEIGHT);
             this.nextScenePanel.TabIndex = 0;
-            // 
-            // Next Scene Label
-            // 
-            nextSceneLabel.AutoSize = true;
-            nextSceneLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            nextSceneLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            nextSceneLabel.Location = new System.Drawing.Point(200, 20);
-            nextSceneLabel.Name = "nextSceneLabel";
-            nextSceneLabel.Size = new System.Drawing.Size(200, 30);
-            nextSceneLabel.TabIndex = 1;
-            nextSceneLabel.Text = "Next Scene";
 
             this.nextScenePanel.ResumeLayout(false);
-            this.nextScenePanel.Controls.Add(nextSceneLabel);
             this.Controls.Add(nextScenePanel);
         }
 
@@ -188,9 +187,9 @@ namespace LCS.Gui
             Button goButton = new Button();
             Button switchSceneButton = new Button();
             Label transitionLabel = new Label();
-            TextBox transitionInputBox = new TextBox();
+            this.transitionInputBox = new TextBox();
             Label secLabel = new Label();
-            
+            this.transitionTimeWarningLabel = new Label();
             // 
             // go panel
             // 
@@ -202,9 +201,9 @@ namespace LCS.Gui
             this.goPanel.AutoScroll = true;
 
             this.goPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.goPanel.Location = new System.Drawing.Point(780, 0);
+            this.goPanel.Location = new System.Drawing.Point(scenePanelWidth, 0);
             this.goPanel.Name = "goPanel";
-            this.goPanel.Size = new System.Drawing.Size(220, 210);
+            this.goPanel.Size = new System.Drawing.Size(OTHER_PANEL_WIDTH, 210);
             this.goPanel.TabIndex = 0;
             // 
             // Go button
@@ -236,7 +235,7 @@ namespace LCS.Gui
             transitionLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             transitionLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             transitionLabel.Location = new System.Drawing.Point(110, 130);
-            transitionLabel.Name = "nextSceneLabel";
+            transitionLabel.Name = "transitionLabel";
             transitionLabel.Size = new System.Drawing.Size(200, 30);
             transitionLabel.TabIndex = 1;
             transitionLabel.Text = "Transition Time: ";
@@ -250,6 +249,17 @@ namespace LCS.Gui
             transitionInputBox.TabIndex = 0;
             transitionInputBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             transitionInputBox.TextChanged += new System.EventHandler(this.transitionInputBox_TextChanged);
+            // 
+            // Transition time warningLabel
+            // 
+            transitionTimeWarningLabel.AutoSize = true;
+            transitionTimeWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            transitionTimeWarningLabel.ForeColor = System.Drawing.Color.Red;
+            transitionTimeWarningLabel.Location = new System.Drawing.Point(100, 170);
+            transitionTimeWarningLabel.Name = "transitionTimeWarningLabel";
+            transitionTimeWarningLabel.TabIndex = 1;
+            transitionTimeWarningLabel.Text = "Invalid Transition Time";
+            transitionTimeWarningLabel.Visible = false;
             // 
             // second label
             // 
@@ -266,6 +276,7 @@ namespace LCS.Gui
             this.goPanel.Controls.Add(switchSceneButton);
             this.goPanel.Controls.Add(transitionLabel);
             this.goPanel.Controls.Add(transitionInputBox);
+            this.goPanel.Controls.Add(transitionTimeWarningLabel);
             this.goPanel.Controls.Add(secLabel);
             this.Controls.Add(goPanel);
             
@@ -275,22 +286,31 @@ namespace LCS.Gui
         {
             this.namePanel = new Panel();
             this.namePanel.SuspendLayout();
+            Label fixtureName = new Label();
             // 
             // namePanel
             // 
             //horizontal scroll only
-            this.namePanel.AutoScroll = false;
-            this.namePanel.VerticalScroll.Enabled = false;
-            this.namePanel.VerticalScroll.Visible = false;
-            this.namePanel.VerticalScroll.Maximum = 0;
             this.namePanel.AutoScroll = true;
 
             this.namePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.namePanel.Location = new System.Drawing.Point(780, 210);
-            this.namePanel.Name = "nextScenePanel";
+            this.namePanel.Location = new System.Drawing.Point(scenePanelWidth, 210);
+            this.namePanel.Name = "namePanel";
             this.namePanel.Size = new System.Drawing.Size(110, 270);
             this.namePanel.TabIndex = 0;
 
+            // 
+            // fixture name label
+            // 
+            fixtureName.AutoSize = true;
+            fixtureName.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            fixtureName.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            fixtureName.Location = new System.Drawing.Point(13, 5);
+            fixtureName.Name = "fixtureName";
+            fixtureName.TabIndex = 1;
+            fixtureName.Text = "Fixture Name";
+
+            this.namePanel.Controls.Add(fixtureName);
             this.Controls.Add(namePanel);
         }
 
@@ -298,6 +318,7 @@ namespace LCS.Gui
         {
             this.addressPanel = new Panel();
             this.addressPanel.SuspendLayout();
+            Label startAddressLabel = new Label(); 
             // 
             // namePanel
             // 
@@ -309,11 +330,24 @@ namespace LCS.Gui
             this.addressPanel.AutoScroll = true;
 
             this.addressPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.addressPanel.Location = new System.Drawing.Point(890, 210);
-            this.addressPanel.Name = "nextScenePanel";
+            this.addressPanel.Location = new System.Drawing.Point(this.scenePanelWidth + 110, 210);
+            this.addressPanel.Name = "startAddressLabel";
             this.addressPanel.Size = new System.Drawing.Size(110, 270);
             this.addressPanel.TabIndex = 0;
 
+            // 
+            // second label
+            // 
+            startAddressLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            startAddressLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            startAddressLabel.AutoSize = false;
+            startAddressLabel.TextAlign = ContentAlignment.MiddleCenter;
+            startAddressLabel.Dock = DockStyle.Fill;
+            startAddressLabel.Name = "startAddress";
+            startAddressLabel.TabIndex = 1;
+            startAddressLabel.Text = "Start Address";
+
+            this.addressPanel.Controls.Add(startAddressLabel);
             this.Controls.Add(addressPanel);
         }
 
@@ -324,7 +358,7 @@ namespace LCS.Gui
             // add fixture button
             // 
             addFixture.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            addFixture.Location = new System.Drawing.Point(780, 480);
+            addFixture.Location = new System.Drawing.Point(scenePanelWidth, 480);
             addFixture.Name = "addFixtureButton";
             addFixture.Size = new System.Drawing.Size(110, 30);
             addFixture.TabIndex = 0;
@@ -341,7 +375,7 @@ namespace LCS.Gui
             // add fixture button
             // 
             exit.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            exit.Location = new System.Drawing.Point(890, 480);
+            exit.Location = new System.Drawing.Point(this.addressPanel.Location.X, 480);
             exit.Name = "exitButton";
             exit.Size = new System.Drawing.Size(110, 30);
             exit.TabIndex = 0;
@@ -350,6 +384,61 @@ namespace LCS.Gui
             exit.Click += new System.EventHandler(this.exitButton_Click);
             this.Controls.Add(exit);
         }
+
+        private void generateSceneTextPanel(Point location, string text)
+        {
+            Panel SceneTextPanel = new Panel();
+            Label SceneLabel = new Label();
+
+            SceneTextPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            SceneTextPanel.Location = location;
+            SceneTextPanel.Name = "currentScenePanel";
+            SceneTextPanel.Size = new System.Drawing.Size(scenePanelWidth, 30);
+            SceneTextPanel.TabIndex = 0;
+            // 
+            // Current Scene Label
+            // 
+            SceneLabel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            SceneLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            SceneLabel.Name = "currentSceneLabel";
+            SceneLabel.TabIndex = 1;
+            SceneLabel.Text = text;
+            SceneLabel.AutoSize = false;
+            SceneLabel.TextAlign = ContentAlignment.MiddleCenter;
+            SceneLabel.Dock = DockStyle.Fill;
+            SceneTextPanel.Controls.Add(SceneLabel);
+            this.Controls.Add(SceneTextPanel);
+        }
+
+        private void addStartAddress(string address, int fixtureNameId)
+        {
+            Label startAddress = new Label();
+            // 
+            // display all fixtures
+            // 
+            //center text
+            startAddress.AutoSize = false;
+            startAddress.TextAlign = ContentAlignment.MiddleCenter;
+            startAddress.Dock = DockStyle.Fill;
+            startAddress.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            startAddress.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            startAddress.Name = "startAddress";
+            startAddress.TabIndex = 1;
+            startAddress.Text = address;
+            startAddress.BackColor = System.Drawing.SystemColors.ControlDark;
+            startAddress.Location = new Point((this.addressPanel.Size.Width - startAddress.Size.Width) / 2, fixtureNameId * 25 + 25);
+            this.addressPanel.Controls.Add(startAddress);
+        }
+
+        /*
+         * Get fixture name panel
+         */
+        public Panel getNamePanel() => this.namePanel;
+
+        /*
+         * Get address panel
+         */
+        public Panel getAddressPanel() => this.addressPanel;
 
         #endregion
     }

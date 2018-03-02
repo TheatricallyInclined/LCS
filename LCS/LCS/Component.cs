@@ -14,6 +14,11 @@ namespace LCS.Gui
 {
     class Component : Panel
     {
+        /*
+         * data array that stores all slider value
+         * 
+         */
+        private string[,] data;
 
         private System.Windows.Forms.TrackBar trackBar;
 
@@ -33,8 +38,6 @@ namespace LCS.Gui
 
         private const int PADDING = 20;
 
-        private const int PADDING_TOP = 50;
-
         private const int TRACKBARHEIGHT = 125;
 
         private const int TRACKBARWIDTH = 56;
@@ -51,14 +54,16 @@ namespace LCS.Gui
 
         private const int TICKSPACING = 33;
 
+
         /*
          * Constructor method
          * 
          * control: control object that was passed in by MainForm
          * id: the specific id for this component. Uses to determine component location
          */
-        public Component(Control.ControlCollection control, int id)
+        public Component(string[,] data,Control.ControlCollection control, int id)
         {
+            this.data = data;
             this.control = control;
             this.id = id;
             calculatePoints();
@@ -185,6 +190,7 @@ namespace LCS.Gui
             this.name.TabIndex = 0;
             this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.name.Text = "CH " + Convert.ToString(id);
+            this.name.TextChanged += new System.EventHandler(name_ValueChanged);
             this.control.Add(name);
         }
 
@@ -196,6 +202,7 @@ namespace LCS.Gui
         {
             //update numericUpDown
             numericUpDown.Value = trackBar.Value;
+            storeData();
             this.Refresh();
         }
 
@@ -207,7 +214,38 @@ namespace LCS.Gui
         {
             //update track bar
             trackBar.Value = (int)numericUpDown.Value;
+            storeData();
             this.Refresh();
+        }
+
+        /*
+         * update numericUpDown while track bar scrolled
+         *
+         */
+        private void name_ValueChanged(object sender, System.EventArgs e)
+        {
+            int numOfComponents = data.Length / 2;
+            if (id > numOfComponents)
+            {
+                data[numOfComponents + id, 1] = this.name.Text;
+            }
+            else
+            {
+                data[id, 1] = this.name.Text;
+            }
+        }
+
+        private void storeData()
+        {
+            int numOfComponents = data.Length / 2;
+            if(id > numOfComponents)
+            {
+                data[numOfComponents + id, 0] = trackBar.Value.ToString();
+            }
+            else
+            {
+                data[id, 0] = trackBar.Value.ToString();
+            }
         }
 
         /*
@@ -216,7 +254,7 @@ namespace LCS.Gui
         private void calculatePoints()
         {
             //calculate location of the trackBarPoint according to their id
-            this.trackBarPoint = new Point((id + 1) * PADDING + id * TRACKBARWIDTH, PADDING_TOP);
+            this.trackBarPoint = new Point((id + 1) * PADDING + id * TRACKBARWIDTH, PADDING);
             this.numerateUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + 1 + TRACKBARHEIGHT);
             this.namePoint = new Point(numerateUpDownPoint.X, numerateUpDownPoint.Y + NUMERICUPDOWNHEIGHT + 5);
         }

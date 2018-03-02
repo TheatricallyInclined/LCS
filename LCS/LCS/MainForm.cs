@@ -21,7 +21,7 @@ namespace LCS.Gui
         public MainForm(LCS.Logic.Service service, int numOfComponents)
         {
             this.service = service;
-            InitializeComponent(service.mainFormSize());
+            InitializeComponent();
             generateComponents(numOfComponents);
         }
 
@@ -32,7 +32,15 @@ namespace LCS.Gui
         
         private void transitionInputBox_TextChanged(object sender, EventArgs e)
         {
-
+            if (!this.service.setTransitionTime(this.transitionInputBox.Text))
+            {
+                this.transitionTimeWarningLabel.Visible = true;
+            }
+            else
+            {
+                this.transitionTimeWarningLabel.Visible = false;
+            
+            }
         }
 
         private void addFixtureButton_Click(object sender, EventArgs e)
@@ -42,18 +50,9 @@ namespace LCS.Gui
 
         private void exitButton_Click(object sender, EventArgs e)
         {
-
-        }
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-        }
-        private void scroll_Click(object sender, EventArgs e)
-        {
-            this.currentSceneLabel.Location = new Point(200 + this.AutoScrollPosition.X, 20 + this.AutoScrollPosition.Y);
-            //this.currentSceneLabel.BringToFront();
-            this.currentScenePanel.Refresh();
+            System.Environment.Exit(0);
         }
 
-        
+
     }
 }
