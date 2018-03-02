@@ -43,6 +43,19 @@ namespace LCS.Gui
             }
         }
 
+        private void switchButton_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < coms.Length; i+=2)
+            {
+                string tempData1 = data[i, 0];
+                string tempData2 = data[i, 1];
+                //set component values in current scene to next scene
+                coms[i].setValue(Convert.ToInt32(data[i + 1, 0]), data[i + 1, 1]);
+                //set component values in next scene to current scene
+                coms[i + 1].setValue(Convert.ToInt32(tempData1), tempData2);
+            }
+        }
+
         private void addFixtureButton_Click(object sender, EventArgs e)
         {
 

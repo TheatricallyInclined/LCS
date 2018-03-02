@@ -198,6 +198,7 @@ namespace LCS.Logic
             this.fixtureList.Add(data);
         }
 
+
         /*
          * getter method for maxChannels
          */

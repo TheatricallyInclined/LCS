@@ -18,6 +18,11 @@ namespace LCS.Gui
          */
         private string[,] data;
 
+        /*
+         * Components in main form
+         */
+        private Component[] coms;
+
         private Panel currentScenePanel;
 
         private Panel nextScenePanel;
@@ -108,6 +113,7 @@ namespace LCS.Gui
         {
             this.scenePanelWidth = this.service.scenePanelWidth();
             this.data = new string[numOfComponents * 2, 2];
+            this.coms = new Component[numOfComponents * 2];
             //generate main form
             generateCurrentScenePanel();
             generateNextScenePanel();
@@ -116,11 +122,12 @@ namespace LCS.Gui
             generateAddressPanel();
             generateAddFixtureButton();
             generateExitButton();
+            int id = 0;
             //generate components in current and next panel
             for (int i = 0; i < numOfComponents; i++)
             {
-                new Component(data, this.currentScenePanel.Controls, i);
-                new Component(data, this.nextScenePanel.Controls, i);
+                coms[id] = new Component(data, this.currentScenePanel.Controls, id++);
+                coms[id] = new Component(data, this.nextScenePanel.Controls, id++);
             }
             new FixtureNameLabel(service, this.namePanel, service.getFxitureName(), service.nextFixtureId());
             addStartAddress(service.getStartAddressAsString(), service.nextFixtureId());
@@ -227,7 +234,7 @@ namespace LCS.Gui
             switchSceneButton.TabIndex = 0;
             switchSceneButton.Text = "Switch Scene";
             switchSceneButton.UseVisualStyleBackColor = true;
-            switchSceneButton.Click += new System.EventHandler(this.goButton_Click);
+            switchSceneButton.Click += new System.EventHandler(this.switchButton_Click);
             // 
             // Transition time label
             // 
