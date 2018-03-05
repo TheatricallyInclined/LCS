@@ -33,7 +33,7 @@ namespace LCS.Logic
         /*
          * The maximum possible channels can have in this device
          */
-        private const int MAX_CHANNELS = 512;
+        private const int MAX_CHANNELS = 50;
 
         private const int NUM_OF_COMPONENTS_IN_LINE = 12;
 
@@ -45,7 +45,7 @@ namespace LCS.Logic
         /*
          * Maxinum address can the device have
          */
-        private const int MAX_ADDRESS = 200;
+        private const int MAX_ADDRESS = 512;
 
         /*
          * Fixture name
