@@ -136,7 +136,7 @@
             this.channelWarningLabel.Name = "channelWarningLabel";
             this.channelWarningLabel.Size = new System.Drawing.Size(273, 30);
             this.channelWarningLabel.TabIndex = 1;
-            this.channelWarningLabel.Text = "Please enter a valid number between 0 and " + service.getMaxChannels().ToString();
+            this.channelWarningLabel.Text = "Please enter a valid number between 1 and " + service.getMaxChannels().ToString();
             this.channelWarningLabel.Visible = false;
             // 
             // name warningLabel
@@ -160,7 +160,7 @@
             this.addressWarningLabel.Name = "addressWarningLabel";
             this.addressWarningLabel.Size = new System.Drawing.Size(273, 30);
             this.addressWarningLabel.TabIndex = 1;
-            this.addressWarningLabel.Text = "Please enter a valid address between 0 and " + service.getMaxAddress().ToString();
+            this.addressWarningLabel.Text = "Please enter a valid address between 1 and " + service.getMaxAddress().ToString();
             this.addressWarningLabel.Visible = false;
             // 
             // InputForm
