@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LCS.Gui;
+using System.Collections;
 
 namespace LCS.Logic
 {
@@ -34,7 +35,7 @@ namespace LCS.Logic
          */
         private const int MAX_CHANNELS = 512;
 
-        private const int NUMOFCOMPONENTINONELINE = 15;
+        private const int NUM_OF_COMPONENTS_IN_LINE = 12;
 
         /*
          * Starting address of this application
@@ -51,12 +52,22 @@ namespace LCS.Logic
          */
         private String fixtureName = null;
 
+        /*
+         * Transition time between two scenes in ms
+         */
+        private int transitionTime;
+
+        /*
+         * A list that stores all fixtures
+         */
+        private ArrayList fixtureList;
 
         /*
          * Constructor class
          */
         public Service()
         {
+            this.fixtureList = new ArrayList();
             startApp();
         }
 
@@ -144,20 +155,47 @@ namespace LCS.Logic
         }
 
         /*
+         * Check if the input string is a valid number
+         * 
+         * set the transition time if the input is valid and return true,
+         * otherwise return false
+         */
+        public bool setTransitionTime(String time)
+        {
+            int transitionTime;
+            bool valid = int.TryParse(time, out transitionTime);
+            // check if the input is valid
+            if (valid)
+            {
+                this.transitionTime = transitionTime;
+                return true;
+            }
+            return false;
+        }
+
+        /*
          * Calculates the main form size by number of channels that user input
          */
         public System.Drawing.Size mainFormSize()
         {
-            int componentNumVertical = (numOfChannels / NUMOFCOMPONENTINONELINE)+1;
-            int componentNumHorizon = componentNumVertical > 1 ? NUMOFCOMPONENTINONELINE : numOfChannels % NUMOFCOMPONENTINONELINE;
-            //if number of components is multiple of 15, minus the vertical line by 1
-            if (numOfChannels % NUMOFCOMPONENTINONELINE == 0)
-            {
-                componentNumVertical--;
-            }
+            int componentsInLine = numOfChannels < NUM_OF_COMPONENTS_IN_LINE ? numOfChannels : NUM_OF_COMPONENTS_IN_LINE;
             //the height of one component is 194px, plus 20px padding
             //the width of one component is 56px + 20px padding between two components
-            return new System.Drawing.Size((componentNumHorizon * (20+56)) + 15, componentNumVertical * (194) + 20);
+            return new System.Drawing.Size(componentsInLine * (56 + 20) + 20 + 220, 510);
+        }
+
+        /*
+         * Calculates scene panel width according to number of channels
+         */
+        public int scenePanelWidth()
+        {
+            int componentsInLine = numOfChannels < NUM_OF_COMPONENTS_IN_LINE ? numOfChannels : NUM_OF_COMPONENTS_IN_LINE;
+            return componentsInLine * (56 + 20) + 20;
+        }
+
+        public void addData(string[,] data)
+        {
+            this.fixtureList.Add(data);
         }
 
         /*
@@ -166,6 +204,14 @@ namespace LCS.Logic
         public int getMaxChannels() => MAX_CHANNELS;
 
         public int getMaxAddress() => MAX_ADDRESS;
+
+        public int nextFixtureId() => this.fixtureList.Count;
+
+        public string getFxitureName() => fixtureName;
+
+        public ArrayList getFixtureList() => this.fixtureList;
+
+        public string getStartAddressAsString() => this.startAddress.ToString();
     }
 
 }
