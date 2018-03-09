@@ -12,8 +12,13 @@ using System.Windows.Forms;
 */
 namespace LCS.Gui
 {
-    class Component : Form
+    class Component : Panel
     {
+        /*
+         * data array that stores all slider value
+         * 
+         */
+        private string[,] data;
 
         private System.Windows.Forms.TrackBar trackBar;
 
@@ -25,7 +30,7 @@ namespace LCS.Gui
 
         private Point trackBarPoint;
 
-        private Point numerateUpDownPoint;
+        private Point numericUpDownPoint;
 
         private Point namePoint;
 
@@ -49,14 +54,16 @@ namespace LCS.Gui
 
         private const int TICKSPACING = 33;
 
+
         /*
          * Constructor method
          * 
          * control: control object that was passed in by MainForm
          * id: the specific id for this component. Uses to determine component location
          */
-        public Component(Control.ControlCollection control, int id)
+        public Component(string[,] data,Control.ControlCollection control, int id)
         {
+            this.data = data;
             this.control = control;
             this.id = id;
             calculatePoints();
@@ -147,7 +154,7 @@ namespace LCS.Gui
             //start initialization
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).BeginInit();
             //initialize numericUpDown
-            this.numericUpDown.Location = numerateUpDownPoint;
+            this.numericUpDown.Location = numericUpDownPoint;
             this.numericUpDown.Maximum = new decimal(new int[] {
                255,
                 0,
@@ -161,6 +168,7 @@ namespace LCS.Gui
             this.numericUpDown.Size = new System.Drawing.Size(NUMERICUPDOWNWIDTH, NUMERICUPDOWNHEIGHT);
             this.numericUpDown.TabIndex = 1;
             this.numericUpDown.ValueChanged += new System.EventHandler(this.numericUpDown_ValueChanged);
+            this.data[id, 0] = trackBar.Value.ToString();
             this.control.Add(this.numericUpDown);
             //start initialization
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown)).EndInit();
@@ -182,7 +190,9 @@ namespace LCS.Gui
             this.name.BackColor = System.Drawing.SystemColors.ControlDark;
             this.name.TabIndex = 0;
             this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.name.Text = "CH " + Convert.ToString(id);
+            this.name.Text = "CH " + Convert.ToString(id/2 + 1);
+            this.data[id, 1] = this.name.Text;
+            this.name.TextChanged += new System.EventHandler(name_ValueChanged);
             this.control.Add(name);
         }
 
@@ -194,6 +204,7 @@ namespace LCS.Gui
         {
             //update numericUpDown
             numericUpDown.Value = trackBar.Value;
+            storeData();
             this.Refresh();
         }
 
@@ -205,7 +216,22 @@ namespace LCS.Gui
         {
             //update track bar
             trackBar.Value = (int)numericUpDown.Value;
+            storeData();
             this.Refresh();
+        }
+
+        /*
+         * update numericUpDown while track bar scrolled
+         *
+         */
+        private void name_ValueChanged(object sender, System.EventArgs e)
+        {
+            data[id, 1] = this.name.Text;
+        }
+
+        private void storeData()
+        {
+            data[id, 0] = trackBar.Value.ToString();
         }
 
         /*
@@ -213,13 +239,22 @@ namespace LCS.Gui
          */
         private void calculatePoints()
         {
-            int componentNumVertical = id / 15;
-            int componentNumHorizon = id % 15;
+            int locationIndex = (id / 2);
             //calculate location of the trackBarPoint according to their id
-            this.trackBarPoint = new Point(PADDING + (componentNumHorizon * TRACKBARWIDTH) + (PADDING * componentNumHorizon),
-                componentNumVertical * (TRACKBARHEIGHT + NUMERICUPDOWNHEIGHT + 5 + NUMERICUPDOWNHEIGHT + PADDING + 5)+ PADDING);
-            this.numerateUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + 1 + TRACKBARHEIGHT);
-            this.namePoint = new Point(numerateUpDownPoint.X, numerateUpDownPoint.Y + NUMERICUPDOWNHEIGHT + 5);
+            this.trackBarPoint = new Point((locationIndex + 1) * PADDING + locationIndex * TRACKBARWIDTH, PADDING);
+            this.numericUpDownPoint = new Point(trackBarPoint.X, trackBarPoint.Y + 1 + TRACKBARHEIGHT);
+            this.namePoint = new Point(numericUpDownPoint.X, numericUpDownPoint.Y + NUMERICUPDOWNHEIGHT + 5);
+        }
+
+        /*
+         * Sets the value of track bar, numberic up down, and channel name
+         */
+        public void setValue(int value, string name)
+        {
+            this.trackBar.Value = value;
+            this.numericUpDown.Value = value;
+            this.name.Text = name;
+            this.Refresh();
         }
     }
 }
