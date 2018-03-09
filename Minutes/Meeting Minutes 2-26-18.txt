@@ -1,0 +1,21 @@
+Team: Theatrically Inclined
+Date: 2/26/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+How DMX protocol talks to the light
+Alpha release work timeline
+How the Enttec C# Class looks and how to integrate it into our project
+Functionality Goals for Alpha Release
+
+
+Accomplished Since Last Meeting: 
+Alex: Updated all information for Prototype Release. Made Youtube Video.
+Zack: Ordered Enttec open USB to DMX box. Looked into class information
+Rong: Refined GUI for Prototype
+
+Plan to Accomplish: 
+Alex: Adding functionality to GUI, mainly making sliders work.
+Zack: Get C# Class integrated to Project
+Rong: Added Sections to GUI for Multiple Lights and 2 scene support.

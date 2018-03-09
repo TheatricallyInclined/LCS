@@ -1,0 +1,21 @@
+Team: Theatrically Inclined
+Date: 2/19/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+GUI refinement 
+Talked with TA about refining README
+Doodle poll submission
+What to do about USB protocol
+
+
+Accomplished Since Last Meeting: 
+Alex: Found some C# usb library for DMX, Designed Base GUI
+Zack: Found Open Source USB to DMX (Enttec)
+Rong: Base GUI
+
+Plan to Accomplish: 
+Alex: Update Main GUI, Update README
+Zack: Find USB libraries to utilize 
+Rong: GUI Additions for Form Page
