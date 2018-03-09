@@ -372,6 +372,7 @@ namespace LCS.Gui
             addFixture.Text = "Add Fixture";
             addFixture.UseVisualStyleBackColor = true;
             addFixture.Click += new System.EventHandler(this.addFixtureButton_Click);
+            addFixture.Enabled = false;
             this.Controls.Add(addFixture);
         }
 
