@@ -40,6 +40,10 @@ namespace LCS.Gui
                 this.goButton.Text = "STOP";
                 //change background color
                 this.goButton.BackColor = Color.OrangeRed;
+                foreach (Component c in coms)
+                {
+                    c.componentSwitch(false);
+                }
             }
             else
             {
@@ -50,6 +54,10 @@ namespace LCS.Gui
                 this.goButton.Text = "GO!";
                 //change background color
                 this.goButton.BackColor = Color.LightGreen;
+                foreach (Component c in coms)
+                {
+                    c.componentSwitch(true);
+                }
             }
         }
 

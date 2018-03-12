@@ -54,11 +54,6 @@ namespace LCS.Gui
 
         private const int TICKSPACING = 33;
 
-
-        // This delegate enables asynchronous calls for setting  
-        // the text property on a TextBox control.  
-        delegate void SetValueReturningVoidDelegate(int value, string text);
-
         /*
          * Constructor method
          * 
@@ -252,26 +247,24 @@ namespace LCS.Gui
 
         /*
          * Sets the value of track bar, numberic up down, and channel name
-         * reference: C# making thread-safe calls to Windoes Forms Comtrols
-         * link: https://docs.microsoft.com/en-us/dotnet/framework/winforms/controls/how-to-make-thread-safe-calls-to-windows-forms-controls
          */
         public void setValue(int value, string name)
         {
-            // InvokeRequired required compares the thread ID of the  
-            // calling thread to the thread ID of the creating thread.  
-            // If these threads are different, it returns true. 
-            if (this.trackBar.InvokeRequired && this.numericUpDown.InvokeRequired)
-            {
-                SetValueReturningVoidDelegate d = new SetValueReturningVoidDelegate(setValue);
-                this.Invoke(d, new object[] { value }, new object[] { name });
-            }
-            else
-            {
-                this.trackBar.Value = value;
-                this.numericUpDown.Value = value;
-                this.name.Text = name;
-                this.Refresh();
-            }
+            this.trackBar.Value = value;
+            this.numericUpDown.Value = value;
+            this.name.Text = name;
+            this.Refresh();
+        }
+
+        /*
+         * This method enables/disables the components in this class
+         * Will only be called when it is on/off transition
+         */
+        public void componentSwitch(Boolean swit)
+        {
+            this.trackBar.Enabled = swit;
+            this.numericUpDown.Enabled = swit;
+            this.name.Enabled = swit;
         }
     }
 }
