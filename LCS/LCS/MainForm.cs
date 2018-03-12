@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace LCS.Gui
 {
@@ -27,9 +28,31 @@ namespace LCS.Gui
 
         private void goButton_Click(object sender, EventArgs e)
         {
+            if ("GO!".Equals(this.goButton.Text)){
+                //if timed transition is on
+                //start timer thread
+                //TODO this will cause exception due to cross thread manipulation of sliders
+                /*System.Timers.Timer timer = new System.Timers.Timer();
+                timer.Interval = 1000;
+                timer.Elapsed += switchButton_Click;
+                timer.Start();*/
+                //change goButton text to STOP
+                this.goButton.Text = "STOP";
+                //change background color
+                this.goButton.BackColor = Color.OrangeRed;
+            }
+            else
+            {
+                //if timed transition is off
+                //stop the running thread
 
+                //change text to STOP
+                this.goButton.Text = "GO!";
+                //change background color
+                this.goButton.BackColor = Color.LightGreen;
+            }
         }
-        
+
         private void transitionInputBox_TextChanged(object sender, EventArgs e)
         {
             if (!this.service.setTransitionTime(this.transitionInputBox.Text))
