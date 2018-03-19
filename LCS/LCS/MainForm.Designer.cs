@@ -39,6 +39,8 @@ namespace LCS.Gui
 
         private Button goButton;
 
+        private Button switchSceneButton;
+
         private const int PADDING = 20;
 
         private int scenePanelWidth;
@@ -195,7 +197,7 @@ namespace LCS.Gui
             this.goPanel = new Panel();
             this.goPanel.SuspendLayout();
             goButton = new Button();
-            Button switchSceneButton = new Button();
+            switchSceneButton = new Button();
             Label transitionLabel = new Label();
             this.transitionInputBox = new TextBox();
             Label secLabel = new Label();
@@ -451,6 +453,8 @@ namespace LCS.Gui
          * Get address panel
          */
         public Panel getAddressPanel() => this.addressPanel;
+
+        public string[,] getData() => this.data;
 
         #endregion
     }

@@ -26,43 +26,77 @@ namespace LCS.Gui
             generateComponents(numOfComponents);
         }
 
+        /*
+         * Go button onclick listener
+         */
         private void goButton_Click(object sender, EventArgs e)
         {
-            if ("GO!".Equals(this.goButton.Text)){
+            /*
+             * If the transition time is empty, display the label and return without start the transition
+             */
+            if (service.getTransitionTime() == -1)
+            {
+                this.transitionTimeWarningLabel.Visible = true;
+                return;
+            }
+            if (!service.isInTransition()){
                 //if timed transition is on
-                //start timer thread
-                //TODO this will cause exception due to cross thread manipulation of sliders
-                /*System.Timers.Timer timer = new System.Timers.Timer();
-                timer.Interval = 1000;
-                timer.Elapsed += switchButton_Click;
-                timer.Start();*/
                 //change goButton text to STOP
                 this.goButton.Text = "STOP";
                 //change background color
                 this.goButton.BackColor = Color.OrangeRed;
-                foreach (Component c in coms)
-                {
-                    c.componentSwitch(false);
-                }
+                //disable current, next scene panel, transition input box and switch scene panel
+                currentScenePanel.Enabled = false;
+                nextScenePanel.Enabled = false;
+                transitionInputBox.Enabled = false;
+                switchSceneButton.Enabled = false;
+                service.setInTransition(true);
+                //set current and next scene values
+                service.setSceneValue(data);
+                //stop the running thread
+                service.timer.Stop();
+                service.timer.Dispose();
+                service.calculateTransition();
+                //start timer thread
+                service.timer = new System.Timers.Timer(service.getPhraseTime());
+                service.timer.Elapsed += service.transitionControl;
+                service.timer.Start();
             }
             else
             {
                 //if timed transition is off
-                //stop the running thread
-
                 //change text to STOP
                 this.goButton.Text = "GO!";
                 //change background color
                 this.goButton.BackColor = Color.LightGreen;
-                foreach (Component c in coms)
-                {
-                    c.componentSwitch(true);
-                }
+                //enable current, next scene panel, transition input box and switch scene panel
+                currentScenePanel.Enabled = true;
+                nextScenePanel.Enabled = true;
+                transitionInputBox.Enabled = true;
+                switchSceneButton.Enabled = true;
+                service.setInTransition(false);
+                //stop the running timer
+                service.timer.Stop();
+                service.timer.Dispose();
+                //start new timer
+                service.timer = new System.Timers.Timer(200);
+                service.timer.Elapsed += service.liveControl;
+                service.timer.Start();
             }
         }
 
+        /*
+         * InputBox text change listener
+         */
         private void transitionInputBox_TextChanged(object sender, EventArgs e)
         {
+            /*
+             * If it's in transition, don't allow user to make any modifications
+             */
+            if (service.isInTransition())
+            {
+                return;
+            }
             if (!this.service.setTransitionTime(this.transitionInputBox.Text))
             {
                 this.transitionTimeWarningLabel.Visible = true;
@@ -74,9 +108,19 @@ namespace LCS.Gui
             }
         }
 
+        /*
+         * Switch button onclick listener
+         */
         private void switchButton_Click(object sender, EventArgs e)
         {
-            for(int i = 0; i < coms.Length; i+=2)
+            /*
+             * If it's in transition, don't allow user to make any modifications
+             */
+            if (service.isInTransition())
+            {
+                return;
+            }
+            for (int i = 0; i < coms.Length; i+=2)
             {
                 string tempData1 = data[i, 0];
                 string tempData2 = data[i, 1];
@@ -87,11 +131,17 @@ namespace LCS.Gui
             }
         }
 
+        /*
+         * Add fixture button onclick listener
+         */
         private void addFixtureButton_Click(object sender, EventArgs e)
         {
 
         }
 
+        /*
+         * exit button onclick listener
+         */
         private void exitButton_Click(object sender, EventArgs e)
         {
             System.Environment.Exit(0);
