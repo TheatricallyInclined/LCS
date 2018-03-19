@@ -280,16 +280,21 @@ namespace LCS.Logic
             //update data
             this.setSceneValue(this.mainForm.getData());
             //TODO control the light by passing currentSceneValue array like example below
-            //someMethod(currentSceneValue)
+            //someMethod(currentSceneValue) whereas currentSceneValue is an array if int stores all values of the slider
             Console.WriteLine(System.DateTime.Now);
             Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
                 + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
         }
 
+        /*
+         * This method controls the transition of 
+         */
         public void transitionControl(object sender, EventArgs e)
         {
             //invoke method and pass in data to control light
-            /*  invoke the light controller method like this:
+            /* **Data updating is already handled outside of this class, just need to call the controller method as in the liveControl method**
+                Play around with this fist prior you updating it, see value changes in console            
+             * invoke the light controller method like this:
                     someMethod(transitionData[currentPhrase]);
                 whereas currentPhrase is the current phrase of the transition and 
                 transitionData is a list contains int array int[] of all values
