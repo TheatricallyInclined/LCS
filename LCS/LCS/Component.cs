@@ -255,16 +255,5 @@ namespace LCS.Gui
             this.name.Text = name;
             this.Refresh();
         }
-
-        /*
-         * This method enables/disables the components in this class
-         * Will only be called when it is on/off transition
-         */
-        public void componentSwitch(Boolean swit)
-        {
-            this.trackBar.Enabled = swit;
-            this.numericUpDown.Enabled = swit;
-            this.name.Enabled = swit;
-        }
     }
 }
