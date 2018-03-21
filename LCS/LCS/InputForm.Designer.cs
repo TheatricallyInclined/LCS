@@ -187,6 +187,8 @@
             this.Text = "InputForm";
             this.Click += new System.EventHandler(this.InputForm_Click);
             this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputForm));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.PerformLayout();
 
         }
