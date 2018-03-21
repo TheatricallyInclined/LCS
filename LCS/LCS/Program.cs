@@ -16,7 +16,6 @@ namespace LCS
         static void Main()
         {
             new Service();
-
             /********************************TEST***********************/
             /*
             Application.EnableVisualStyles();
