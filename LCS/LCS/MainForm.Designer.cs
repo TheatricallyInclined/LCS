@@ -37,6 +37,10 @@ namespace LCS.Gui
 
         private Label transitionTimeWarningLabel;
 
+        private Button goButton;
+
+        private Button switchSceneButton;
+
         private const int PADDING = 20;
 
         private int scenePanelWidth;
@@ -44,6 +48,7 @@ namespace LCS.Gui
         private int SCENE_PANEL_HEIGHT = 225;
 
         private const int OTHER_PANEL_WIDTH = 220;
+
 
         /// <summary>
         /// Required designer variable.
@@ -191,8 +196,8 @@ namespace LCS.Gui
         {
             this.goPanel = new Panel();
             this.goPanel.SuspendLayout();
-            Button goButton = new Button();
-            Button switchSceneButton = new Button();
+            goButton = new Button();
+            switchSceneButton = new Button();
             Label transitionLabel = new Label();
             this.transitionInputBox = new TextBox();
             Label secLabel = new Label();
@@ -222,6 +227,7 @@ namespace LCS.Gui
             goButton.TabIndex = 0;
             goButton.Text = "GO!";
             goButton.UseVisualStyleBackColor = true;
+            this.goButton.BackColor = Color.LightGreen;
             goButton.Click += new System.EventHandler(this.goButton_Click);
             this.AcceptButton = goButton;
             // 
@@ -447,6 +453,8 @@ namespace LCS.Gui
          * Get address panel
          */
         public Panel getAddressPanel() => this.addressPanel;
+
+        public string[,] getData() => this.data;
 
         #endregion
     }

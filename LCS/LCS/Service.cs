@@ -55,19 +55,61 @@ namespace LCS.Logic
         /*
          * Transition time between two scenes in ms
          */
-        private int transitionTime;
+        private int transitionTime = -1;
+
+        /*
+         * Time for each phrases of transition
+         * Calculate by transitionTimer/TRANSITION_PHRASE
+         */
+        private int phraseTime;
 
         /*
          * A list that stores all fixtures
          */
-        private ArrayList fixtureList;
+        private List<string[,]> fixtureList;
+
+        /*
+         * An int array that stores the current scene value
+         */
+        private int[] currentSceneValue;
+
+        /*
+         * An int array that stores the next scene value
+         */
+        private int[] nextSceneValue;
+
+        /*
+         * Total number of phrases during one transition
+         */
+        private const int TRANSITION_PHRASE = 4;
+
+        /*
+         * An list that stores data for all phrases used in transition
+         */
+        private List<int[]> transitionData;
+
+        /*
+         * Timer object used both for live control mode and transition mode
+         */
+        public System.Timers.Timer timer;
+
+        /*
+         * Keeps track of current phrase during the transition
+         */
+        private int currentPhrase;
+
+        /*
+         * True if the app is in time transition mode
+         */
+        private bool inTransition = false;
+        
 
         /*
          * Constructor class
          */
         public Service()
         {
-            this.fixtureList = new ArrayList();
+            this.fixtureList = new List<string[,]>();
             startApp();
         }
 
@@ -83,7 +125,7 @@ namespace LCS.Logic
         }
 
         /*
-         * Hide the input form and open the main form
+         * Hide the input form, open the main form and initialize values for main form
          */
         public void startMain() {
             if(this.fixtureName == null || this.startAddress == -1 || this.numOfChannels == -1)
@@ -97,6 +139,21 @@ namespace LCS.Logic
             //when closing the main form, closes the input form
             mainForm.Closed += (s, args) => inputForm.Close();
             mainForm.Show();
+            this.transitionData = new List<int[]>(TRANSITION_PHRASE);
+            this.currentSceneValue = new int[numOfChannels];
+            this.nextSceneValue = new int[numOfChannels];
+            this.control();
+        }
+
+        /*
+         * This method controls the light by periodically invoking a method with a timer
+         */
+        private void control()
+        {
+            //start a new timer
+            timer = new System.Timers.Timer(100);
+            timer.Elapsed += liveControl;
+            timer.Start();
         }
 
         /*
@@ -198,9 +255,110 @@ namespace LCS.Logic
             this.fixtureList.Add(data);
         }
 
+        /*
+         * this method sets both currentSceneValue and nextSceneValue arrays using the values in data array
+         * will only be called when needed
+         */
+        public void setSceneValue(string[,] data)
+        {
+            for(int i = 0; i < currentSceneValue.Length; i++)
+            {
+                //convert the current scene value in data to int and store in currentSceneValue
+                //i >> 1 calculates the exact index of current scene value in data array
+                currentSceneValue[i] = Convert.ToInt32(data[i << 1, 0]);
+                //convert the next scene value in data to int and store in currentSceneValue
+                //(i >> 1)+1 calculates the exact index of next scene value in data array
+                nextSceneValue[i] = Convert.ToInt32(data[(i << 1) + 1, 0]);
+            }
+        }
 
         /*
-         * getter method for maxChannels
+         * This method will control the light lively with current scene values
+         */
+        public void liveControl(object sender, EventArgs e)
+        {
+            //update data
+            this.setSceneValue(this.mainForm.getData());
+            //TODO control the light by passing currentSceneValue array like example below
+            //someMethod(currentSceneValue) whereas currentSceneValue is an array if int stores all values of the slider
+            Console.WriteLine(System.DateTime.Now);
+            Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
+                + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
+        }
+
+        /*
+         * This method controls the transition of 
+         */
+        public void transitionControl(object sender, EventArgs e)
+        {
+            //invoke method and pass in data to control light
+            /* **Data updating is already handled outside of this class, just need to call the controller method as in the liveControl method**
+                Play around with this fist prior you updating it, see value changes in console            
+             * invoke the light controller method like this:
+                    someMethod(transitionData[currentPhrase]);
+                whereas currentPhrase is the current phrase of the transition and 
+                transitionData is a list contains int array int[] of all values
+            */
+            Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
+                + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
+            //update current transition phrase
+            this.nextPhrase();
+
+            Console.WriteLine(System.DateTime.Now);
+        }
+
+        /*
+         * Update current phrase of the transition to next phrase
+         */
+        public void nextPhrase()
+        {
+            currentPhrase++;
+            if(currentPhrase >= TRANSITION_PHRASE)
+            {
+                currentPhrase = 0;
+            }
+        }
+
+        /*
+         * calculates and updates the data that uses for transition mode
+         */
+        public void calculateTransition()
+        {
+            //calculate phraseTime
+            this.phraseTime = transitionTime / TRANSITION_PHRASE;
+            //reset current phrase
+            this.currentPhrase = 0;
+            //phrases during one transition
+            for(int i = 0; i < TRANSITION_PHRASE; i++)
+            {
+                int[] phrase = new int[numOfChannels];
+                transitionData.Add(phrase);
+            }
+            for (int i = 0; i < numOfChannels; i++)
+            {
+                int currValue = currentSceneValue[i];
+                int nextValue = nextSceneValue[i];
+                int change = (int)Math.Round((nextValue - currValue) / (double)(TRANSITION_PHRASE-1), 0);
+                //calculate and store all data for all phrases in transitionData
+                for (int j = 0; j < TRANSITION_PHRASE; j++)
+                {
+                    if(j == TRANSITION_PHRASE - 1)
+                    {
+                        transitionData[j][i] = nextValue;
+                        break;
+                    }
+                    transitionData[j][i] = currValue + (change * j);
+                }
+            }
+        }
+
+        public void setInTransition(bool inTransition)
+        {
+            this.inTransition = inTransition;
+        }
+
+        /*
+         * Bunch of getter method for private fields in this class
          */
         public int getMaxChannels() => MAX_CHANNELS;
 
@@ -210,9 +368,19 @@ namespace LCS.Logic
 
         public string getFxitureName() => fixtureName;
 
-        public ArrayList getFixtureList() => this.fixtureList;
+        public List<string[,]> getFixtureList() => this.fixtureList;
 
         public string getStartAddressAsString() => this.startAddress.ToString();
+
+        public int[] getCurrentSceneValue() => this.currentSceneValue;
+
+        public int[] getNextSceneValue() => this.nextSceneValue;
+
+        public int getTransitionTime() => this.transitionTime;
+
+        public int getPhraseTime() => this.phraseTime;
+
+        public bool isInTransition() => this.inTransition;
     }
 
 }

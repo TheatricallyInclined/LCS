@@ -54,7 +54,6 @@ namespace LCS.Gui
 
         private const int TICKSPACING = 33;
 
-
         /*
          * Constructor method
          * 
