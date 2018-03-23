@@ -85,7 +85,7 @@ namespace LCS.Gui
             this.ClientSize = this.service.mainFormSize();
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
+            //this.BackgroundImage = global::LCS.Properties.Resources.theatre_background1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.ResumeLayout(false);
