@@ -5,12 +5,19 @@ Lighting Controlled Simply
 LCS or Lighting Controlled Simply is a C# desktop based Windows application designed to be an easy to use replacement for two scene preset boards. We are utilizing the open source USB to DMX converter from Enttec to help minimize cost and simplify user hardware complexity. We are looking to deliver all the simplicity and function of a physical board while also having extra tools commonly found in high end boards in order to help the user.
 Download or get more information about our software from our website: http://www.acsu.buffalo.edu/~ryang5/
 
-Tools Need
+Hardware Needed
 ----------
 •	A DMX (Digital Multiplex 512) based light (A light that can be controlled through DMX512)
 More detailed explanation about DMX512 can be found here: https://en.wikipedia.org/wiki/DMX512
 •	Enttec USB to DMX converter (which can be found here: https://www.enttec.com/us/products/controls/dmx-usb/open-dmx-usb/)
+•	5-pin 	(male) to 3-pin (female) DMX adapter (if necessary for your light)	
+
+
+Software Needed
+----------
+•	Enttec USB to DMX Driver (which can be found here: https://www.enttec.com/us/products/controls/dmx-usb/open-dmx-usb/)
 •	LCS software (download source code from our GitHub: https://github.com/TheatricallyInclined/LCS)
+
 
 Features
 --------
@@ -637,3 +644,4 @@ Zack Bowen: zackbowe@buffalo.edu
 
 If you find any bugs in our software, please you can report it as an issue in our GitHub: https://github.com/TheatricallyInclined/LCS/issues or inform us in Gitter Chat Room.
 Our website is: http://www.acsu.buffalo.edu/~ryang5/
+
