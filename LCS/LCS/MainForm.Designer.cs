@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -297,7 +297,8 @@ namespace LCS.Gui
             connectionWarningLabel.Name = "connectionWarningLabel";
             connectionWarningLabel.TabIndex = 1;
             connectionWarningLabel.Text = "No DMX lights connected";
-            connectionWarningLabel.Visible = true;
+
+            connectionWarningLabel.Visible = false;
 
             this.goPanel.Controls.Add(goButton);
             this.goPanel.Controls.Add(switchSceneButton);
@@ -471,6 +472,8 @@ namespace LCS.Gui
 
         public string[,] getData() => this.data;
 
+
+        public Label getConnectionWarningLabel() => this.connectionWarningLabel;
         #endregion
     }
 }

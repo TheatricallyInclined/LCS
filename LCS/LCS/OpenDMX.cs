@@ -7,7 +7,7 @@ using System.IO;
 using System.Threading;
 
 
-namespace Test
+namespace LCS.Enttec
 {
 
     public class OpenDMX
