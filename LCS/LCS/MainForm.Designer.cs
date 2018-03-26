@@ -297,6 +297,7 @@ namespace LCS.Gui
             connectionWarningLabel.Name = "connectionWarningLabel";
             connectionWarningLabel.TabIndex = 1;
             connectionWarningLabel.Text = "No DMX lights connected";
+
             connectionWarningLabel.Visible = false;
 
             this.goPanel.Controls.Add(goButton);
