@@ -139,7 +139,6 @@ namespace LCS.Logic
             //when closing the main form, closes the input form
             mainForm.Closed += (s, args) => inputForm.Close();
             mainForm.Show();
-            this.transitionData = new List<int[]>(TRANSITION_PHRASE);
             this.currentSceneValue = new int[numOfChannels];
             this.nextSceneValue = new int[numOfChannels];
             this.control();
@@ -222,7 +221,7 @@ namespace LCS.Logic
             int transitionTime;
             bool valid = int.TryParse(time, out transitionTime);
             // check if the input is valid
-            if (valid)
+            if (valid && transitionTime != 0)
             {
                 this.transitionTime = transitionTime;
                 return true;
@@ -287,7 +286,7 @@ namespace LCS.Logic
         }
 
         /*
-         * This method controls the transition of 
+         * This method controls the transition of The light
          */
         public void transitionControl(object sender, EventArgs e)
         {
@@ -313,7 +312,15 @@ namespace LCS.Logic
         public void nextPhrase()
         {
             currentPhrase++;
-            if(currentPhrase >= TRANSITION_PHRASE)
+            if(phraseTime == TRANSITION_PHRASE)
+            {
+                //there are two phrases if the transitionTime is smaller than TRANSITION_PHRASE
+                if (currentPhrase >= 2)
+                {
+                    currentPhrase = 0;
+                }
+            }
+            else if(currentPhrase >= TRANSITION_PHRASE)
             {
                 currentPhrase = 0;
             }
@@ -324,8 +331,17 @@ namespace LCS.Logic
          */
         public void calculateTransition()
         {
+            this.transitionData = new List<int[]>(TRANSITION_PHRASE);
             //calculate phraseTime
             this.phraseTime = transitionTime / TRANSITION_PHRASE;
+            //if transition time is less than or equal to the phrase, only have two phrases for the transition
+            if (phraseTime <= TRANSITION_PHRASE)
+            {
+                phraseTime = TRANSITION_PHRASE;
+                transitionData.Add(currentSceneValue);
+                transitionData.Add(nextSceneValue);
+                return;
+            }
             //reset current phrase
             this.currentPhrase = 0;
             //phrases during one transition
@@ -352,14 +368,14 @@ namespace LCS.Logic
             }
         }
 
+        /*
+         * Bunch of getter method for private fields in this class
+         */
         public void setInTransition(bool inTransition)
         {
             this.inTransition = inTransition;
         }
 
-        /*
-         * Bunch of getter method for private fields in this class
-         */
         public int getMaxChannels() => MAX_CHANNELS;
 
         public int getMaxAddress() => MAX_ADDRESS;
