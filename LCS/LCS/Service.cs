@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LCS.Gui;
 using System.Collections;
+using LCS.Enttec;
 
 namespace LCS.Logic
 {
@@ -142,8 +143,37 @@ namespace LCS.Logic
             this.currentSceneValue = new int[numOfChannels];
             this.nextSceneValue = new int[numOfChannels];
             this.control();
+            initializeDMX();
         }
 
+        public void initializeDMX()
+        {
+            try
+            {
+                OpenDMX.start();
+
+                if (OpenDMX.status == FT_STATUS.FT_DEVICE_NOT_FOUND)
+                {
+                    mainForm.getConnectionWarningLabel().Visible = true;
+                    //Console.WriteLine("Could not find Enttec USB");
+                }
+                else if (OpenDMX.status == FT_STATUS.FT_OK)
+                {
+                    //Console.WriteLine("We did it.  We found it.  You are good to go!");
+                }
+                else
+                {
+                    mainForm.getConnectionWarningLabel().Visible = true;
+                    //Console.WriteLine("Be-atch, this shit ain't workin");
+                }
+            }
+            catch (Exception exp)
+            {
+                mainForm.getConnectionWarningLabel().Visible = true;
+                //Console.WriteLine(exp);
+                //Console.WriteLine("This shit encountered a flippy dippy error, gurl!");
+            }
+        }
         /*
          * This method controls the light by periodically invoking a method with a timer
          */
