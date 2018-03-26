@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -40,6 +40,8 @@ namespace LCS.Gui
         private Button goButton;
 
         private Button switchSceneButton;
+
+        private Label connectionWarningLabel;
 
         private const int PADDING = 20;
 
@@ -202,6 +204,7 @@ namespace LCS.Gui
             this.transitionInputBox = new TextBox();
             Label secLabel = new Label();
             this.transitionTimeWarningLabel = new Label();
+            this.connectionWarningLabel = new Label();
             // 
             // go panel
             // 
@@ -284,6 +287,17 @@ namespace LCS.Gui
             secLabel.Size = new System.Drawing.Size(20, 22);
             secLabel.TabIndex = 1;
             secLabel.Text = "ms";
+            // 
+            // Connection warningLabel
+            // 
+            connectionWarningLabel.AutoSize = true;
+            connectionWarningLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            connectionWarningLabel.ForeColor = System.Drawing.Color.Red;
+            connectionWarningLabel.Location = new System.Drawing.Point(48, 10);
+            connectionWarningLabel.Name = "connectionWarningLabel";
+            connectionWarningLabel.TabIndex = 1;
+            connectionWarningLabel.Text = "No DMX lights connected";
+            connectionWarningLabel.Visible = false;
 
             this.goPanel.Controls.Add(goButton);
             this.goPanel.Controls.Add(switchSceneButton);
@@ -291,6 +305,7 @@ namespace LCS.Gui
             this.goPanel.Controls.Add(transitionInputBox);
             this.goPanel.Controls.Add(transitionTimeWarningLabel);
             this.goPanel.Controls.Add(secLabel);
+            this.goPanel.Controls.Add(connectionWarningLabel);
             this.Controls.Add(goPanel);
             
         }
@@ -456,6 +471,8 @@ namespace LCS.Gui
 
         public string[,] getData() => this.data;
 
+
+        public Label getConnectionWarningLabel() => this.connectionWarningLabel;
         #endregion
     }
 }
