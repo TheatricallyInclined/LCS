@@ -286,7 +286,7 @@ namespace LCS.Logic
         }
 
         /*
-         * This method controls the transition of 
+         * This method controls the transition of The light
          */
         public void transitionControl(object sender, EventArgs e)
         {
@@ -368,14 +368,14 @@ namespace LCS.Logic
             }
         }
 
+        /*
+         * Bunch of getter method for private fields in this class
+         */
         public void setInTransition(bool inTransition)
         {
             this.inTransition = inTransition;
         }
 
-        /*
-         * Bunch of getter method for private fields in this class
-         */
         public int getMaxChannels() => MAX_CHANNELS;
 
         public int getMaxAddress() => MAX_ADDRESS;
