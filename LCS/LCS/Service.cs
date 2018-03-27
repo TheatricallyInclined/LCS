@@ -313,9 +313,9 @@ namespace LCS.Logic
                for(int i = 0; i < currentSceneValue.Length; i++){
                 OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
             }
-            Console.WriteLine(System.DateTime.Now);
-            Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
-                + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
+           // Console.WriteLine(System.DateTime.Now);
+           // Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
+           //     + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
         }
 
         /*
@@ -331,12 +331,15 @@ namespace LCS.Logic
                 whereas currentPhrase is the current phrase of the transition and 
                 transitionData is a list contains int array int[] of all values
             */
-            Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
-                + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
+          //  Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
+          //      + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
             //update current transition phrase
+            for(int i = 0; i < currentSceneValue.Length; i++){
+                OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
+            }
             this.nextPhrase();
 
-            Console.WriteLine(System.DateTime.Now);
+          //  Console.WriteLine(System.DateTime.Now);
         }
 
         /*
