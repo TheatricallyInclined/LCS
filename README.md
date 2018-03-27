@@ -29,14 +29,19 @@ LCS or Lighting Controlled Simply is a C# desktop based application designed to 
 
 After downloading the zip and extracting from GitHub. Open the project folder and run the executable file found in the LCS folder or open LCS.sln file with Visual Studio and run it inside Visual Studio.
 
+**Website:** (http://www.acsu.buffalo.edu/~ryang5/)
+
 **YouTube**
 
 *Prototype:* (https://youtu.be/BtzPYucebCA)
+
+*Alpha Release* (https://youtu.be/SiahCRdtPPE)
 
 
 *Enttec open DMX USB https://www.enttec.com/us/products/controls/dmx-usb/open-dmx-usb/*
 
 *DMX512 (Digital Multiplex) is a standard for digital communication networks that are commonly used to control stage lighting and effects. (From https://en.wikipedia.org/wiki/DMX512)*
+
 
 
 
