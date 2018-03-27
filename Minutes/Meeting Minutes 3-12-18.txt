@@ -1,0 +1,20 @@
+Team: Theatrically Inclined
+Date: 3/5/18
+Time: 6-7pm
+Attendance: Excused Absence Zack (@USITT)
+
+Discussion:
+How to do the timed transitions
+Multithreading or not
+What we need for alpha release
+Collaboration Documentation
+
+Accomplished Since Last Meeting: 
+Alex: modified live control framework based on zacks submission
+Zack: submitted enttec class
+Rong: scene swap
+
+Plan to Accomplish: 
+Alex: Live control with light
+Zack: Enttec documentation
+Rong: Timed Transition

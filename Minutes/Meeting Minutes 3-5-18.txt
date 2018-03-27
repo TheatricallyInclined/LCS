@@ -1,0 +1,20 @@
+Team: Theatrically Inclined
+Date: 3/5/18
+Time: 6-7pm
+Attendance: Excused Absence Zack (Tech Rehearsal)
+
+Discussion:
+New Gui Functionality
+Boundaries on number of Channels and DMX Addresses
+Talked about how the ENTTEC DMX Works
+
+
+Accomplished Since Last Meeting: 
+Alex: Designed Backend framework to implement DMX dongle control
+Zack: Integrated the DMX Class into the project Wrote a description of it
+Rong: Fleshed out Gui added some Gui functionality
+
+Plan to Accomplish: 
+Alex: Get Live Control (Current Scene) Functional
+Zack: Function to Call to change DMX values on light
+Rong: Go Button 

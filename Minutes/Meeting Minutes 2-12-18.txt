@@ -1,0 +1,19 @@
+Team: Theatrically Inclined
+Date: 2/12/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+Basic GUI design
+How DMX Lights work
+Programming language C#
+Minimum setup design for prototype
+
+
+Accomplished Since Last Meeting: 
+N/A
+
+Plan to Accomplish: 
+Alex: start building GUI and decide on minimum necessities for functionality 
+Zack: look up and decide on dmx dongle
+Rong: start building framework for GUI 
