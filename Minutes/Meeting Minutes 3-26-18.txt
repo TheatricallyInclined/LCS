@@ -1,0 +1,22 @@
+Team: Theatrically Inclined
+Date: 3/26/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+Last touch ups for alpha release
+Collaboration phase tasks
+ 
+
+
+Accomplished Since Last Meeting: 
+Alex: Functionality for our code to talk to enttec code
+Zack: Method to initialize DMX usb connection
+Rong: Added GUI Functionality
+
+Plan to Accomplish: 
+Alex: Video For Alpha release, Alpha Release Paperwork
+Zack: Bug Testing
+Rong:  Add Fixture Button
+
+
