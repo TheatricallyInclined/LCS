@@ -310,7 +310,7 @@ namespace LCS.Logic
             this.setSceneValue(this.mainForm.getData());
             //TODO control the light by passing currentSceneValue array like example below
             //someMethod(currentSceneValue) whereas currentSceneValue is an array if int stores all values of the slider
-               for(int i = 0; i < currentSceneValue.size(); i++){
+               for(int i = 0; i < currentSceneValue.Length; i++){
                 OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
             }
             Console.WriteLine(System.DateTime.Now);
