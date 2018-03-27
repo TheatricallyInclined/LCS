@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LCS.Gui;
 using System.Collections;
+using LCS.Enttec;
 
 namespace LCS.Logic
 {
@@ -142,8 +143,37 @@ namespace LCS.Logic
             this.currentSceneValue = new int[numOfChannels];
             this.nextSceneValue = new int[numOfChannels];
             this.control();
+            initializeDMX();
         }
 
+        public void initializeDMX()
+        {
+            try
+            {
+                OpenDMX.start();
+
+                if (OpenDMX.status == FT_STATUS.FT_DEVICE_NOT_FOUND)
+                {
+                    mainForm.getConnectionWarningLabel().Visible = true;
+                    //Console.WriteLine("Could not find Enttec USB");
+                }
+                else if (OpenDMX.status == FT_STATUS.FT_OK)
+                {
+                    //Console.WriteLine("We did it.  We found it.  You are good to go!");
+                }
+                else
+                {
+                    mainForm.getConnectionWarningLabel().Visible = true;
+                    //Console.WriteLine("Be-atch, this shit ain't workin");
+                }
+            }
+            catch (Exception exp)
+            {
+                mainForm.getConnectionWarningLabel().Visible = true;
+                //Console.WriteLine(exp);
+                //Console.WriteLine("This shit encountered a flippy dippy error, gurl!");
+            }
+        }
         /*
          * This method controls the light by periodically invoking a method with a timer
          */
@@ -280,9 +310,12 @@ namespace LCS.Logic
             this.setSceneValue(this.mainForm.getData());
             //TODO control the light by passing currentSceneValue array like example below
             //someMethod(currentSceneValue) whereas currentSceneValue is an array if int stores all values of the slider
-            Console.WriteLine(System.DateTime.Now);
-            Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
-                + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
+               for(int i = 0; i < currentSceneValue.Length; i++){
+                OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
+            }
+           // Console.WriteLine(System.DateTime.Now);
+           // Console.WriteLine(currentSceneValue[0] + "---" + currentSceneValue[1]
+           //     + "---" + currentSceneValue[2] + "---" + currentSceneValue[3] + "---" + currentSceneValue[4]);
         }
 
         /*
@@ -298,12 +331,15 @@ namespace LCS.Logic
                 whereas currentPhrase is the current phrase of the transition and 
                 transitionData is a list contains int array int[] of all values
             */
-            Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
-                + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
+          //  Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
+          //      + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
             //update current transition phrase
+            for(int i = 0; i < currentSceneValue.Length; i++){
+                OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
+            }
             this.nextPhrase();
 
-            Console.WriteLine(System.DateTime.Now);
+          //  Console.WriteLine(System.DateTime.Now);
         }
 
         /*
