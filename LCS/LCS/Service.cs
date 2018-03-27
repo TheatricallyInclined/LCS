@@ -310,7 +310,7 @@ namespace LCS.Logic
             this.setSceneValue(this.mainForm.getData());
             //TODO control the light by passing currentSceneValue array like example below
             //someMethod(currentSceneValue) whereas currentSceneValue is an array if int stores all values of the slider
-               for(int i = 0; i < currentSceneValue.Length; i++){
+            for(int i = 0; i < currentSceneValue.Length; i++){
                 OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
             }
            // Console.WriteLine(System.DateTime.Now);
@@ -331,11 +331,11 @@ namespace LCS.Logic
                 whereas currentPhrase is the current phrase of the transition and 
                 transitionData is a list contains int array int[] of all values
             */
-          //  Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
-          //      + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
+            //Console.WriteLine(currentPhrase+"---"+transitionData[currentPhrase][0] + "---" + transitionData[currentPhrase][1]
+            //   + "---" + transitionData[currentPhrase][2] + "---" + transitionData[currentPhrase][3] + "---" + transitionData[currentPhrase][4]);
             //update current transition phrase
             for(int i = 0; i < currentSceneValue.Length; i++){
-                OpenDMX.setDmxValue(i,Convert.ToByte(currentSceneValue[i]));
+                OpenDMX.setDmxValue(i,Convert.ToByte(transitionData[currentPhrase][i]));
             }
             this.nextPhrase();
 
