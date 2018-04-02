@@ -1,0 +1,19 @@
+Team: Theatrically Inclined
+Date: 4/2/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+Demoed for Alpha Testers
+Class Presentation
+Went over Collaboration Phase Problems
+
+Accomplished Since Last Meeting: 
+Alex: Live Control, youtube video, manuals for alpha release, bug #69
+Zack: Base Bug Testing
+Rong: Manuals for Alpha Release
+
+Plan to Accomplish: 
+Alex: Feasibility of add on features
+Zack: Bug Testing
+Rong: Add Fixtures
