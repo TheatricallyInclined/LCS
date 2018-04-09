@@ -1,0 +1,19 @@
+Team: Theatrically Inclined
+Date: 4/9/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+How to correct test cases for lecture activity
+What is needed for Beta Release
+
+
+Accomplished Since Last Meeting: 
+Alex: Complexity of add fixture button
+Zack: Bug tests
+Rong: Increased steps for timed transitions, finished website
+
+Plan to Accomplish: 
+Alex: Beta Video
+Zack: Bug Tests
+Rong: Bug testing
