@@ -60,7 +60,7 @@ namespace LCS.Logic
 
         /*
          * Time for each phrases of transition
-         * Calculate by transitionTimer/TRANSITION_PHRASE
+         * Calculate by transitionTimer/transitionPhrase
          */
         private int phraseTime;
 
@@ -82,7 +82,7 @@ namespace LCS.Logic
         /*
          * Total number of phrases during one transition
          */
-        private const int TRANSITION_PHRASE = 4;
+        private int transitionPhrase = 4;
 
         /*
          * An list that stores data for all phrases used in transition
@@ -348,15 +348,15 @@ namespace LCS.Logic
         public void nextPhrase()
         {
             currentPhrase++;
-            if(phraseTime == TRANSITION_PHRASE)
+            if(phraseTime == transitionPhrase)
             {
-                //there are two phrases if the transitionTime is smaller than TRANSITION_PHRASE
+                //there are two phrases if the transitionTime is smaller than transitionPhrase
                 if (currentPhrase >= 2)
                 {
                     currentPhrase = 0;
                 }
             }
-            else if(currentPhrase >= TRANSITION_PHRASE)
+            else if(currentPhrase >= transitionPhrase)
             {
                 currentPhrase = 0;
             }
@@ -367,13 +367,17 @@ namespace LCS.Logic
          */
         public void calculateTransition()
         {
-            this.transitionData = new List<int[]>(TRANSITION_PHRASE);
-            //calculate phraseTime
-            this.phraseTime = transitionTime / TRANSITION_PHRASE;
-            //if transition time is less than or equal to the phrase, only have two phrases for the transition
-            if (phraseTime <= TRANSITION_PHRASE)
+            if(transitionTime > 400)
             {
-                phraseTime = TRANSITION_PHRASE;
+                transitionPhrase = (transitionTime / 100);
+            }
+            this.transitionData = new List<int[]>(transitionPhrase);
+            //calculate phraseTime
+            this.phraseTime = transitionTime / transitionPhrase;
+            //if transition time is less than or equal to the phrase, only have two phrases for the transition
+            if (phraseTime <= transitionPhrase)
+            {
+                phraseTime = transitionPhrase;
                 transitionData.Add(currentSceneValue);
                 transitionData.Add(nextSceneValue);
                 return;
@@ -381,7 +385,7 @@ namespace LCS.Logic
             //reset current phrase
             this.currentPhrase = 0;
             //phrases during one transition
-            for(int i = 0; i < TRANSITION_PHRASE; i++)
+            for(int i = 0; i < transitionPhrase; i++)
             {
                 int[] phrase = new int[numOfChannels];
                 transitionData.Add(phrase);
@@ -390,11 +394,11 @@ namespace LCS.Logic
             {
                 int currValue = currentSceneValue[i];
                 int nextValue = nextSceneValue[i];
-                int change = (int)Math.Round((nextValue - currValue) / (double)(TRANSITION_PHRASE-1), 0);
+                int change = (int)Math.Round((nextValue - currValue) / (double)(transitionPhrase-1), 0);
                 //calculate and store all data for all phrases in transitionData
-                for (int j = 0; j < TRANSITION_PHRASE; j++)
+                for (int j = 0; j < transitionPhrase; j++)
                 {
-                    if(j == TRANSITION_PHRASE - 1)
+                    if(j == transitionPhrase - 1)
                     {
                         transitionData[j][i] = nextValue;
                         break;

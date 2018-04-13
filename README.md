@@ -37,6 +37,8 @@ After downloading the zip and extracting from GitHub. Open the project folder an
 
 *Alpha Release* (https://youtu.be/SiahCRdtPPE)
 
+*Beta Release* (https://youtu.be/WQVcTWL60No)
+
 
 *Enttec open DMX USB https://www.enttec.com/us/products/controls/dmx-usb/open-dmx-usb/*
 
