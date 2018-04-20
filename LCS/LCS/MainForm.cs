@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Timers;
+using LCS.Logic;
+
 
 namespace LCS.Gui
 {
@@ -136,7 +138,7 @@ namespace LCS.Gui
          */
         private void addFixtureButton_Click(object sender, EventArgs e)
         {
-
+           service.newInputForm();
         }
 
         /*

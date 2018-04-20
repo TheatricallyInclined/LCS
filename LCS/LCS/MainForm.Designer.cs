@@ -41,6 +41,8 @@ namespace LCS.Gui
 
         private Button switchSceneButton;
 
+        private Button addfixture;
+
         private Label connectionWarningLabel;
 
         private const int PADDING = 20;
@@ -394,7 +396,6 @@ namespace LCS.Gui
             addFixture.Text = "Add Fixture";
             addFixture.UseVisualStyleBackColor = true;
             addFixture.Click += new System.EventHandler(this.addFixtureButton_Click);
-            addFixture.Enabled = false;
             this.Controls.Add(addFixture);
         }
 
