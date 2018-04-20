@@ -67,6 +67,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Service.cs" />
+    <Compile Include="SetAddressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetAddressForm.Designer.cs">
+      <DependentUpon>SetAddressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="test.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SetAddressForm.resx">
+      <DependentUpon>SetAddressForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="test.resx">
       <DependentUpon>test.cs</DependentUpon>
     </EmbeddedResource>

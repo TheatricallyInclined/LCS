@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace LCS
 {
-    public partial class test : Form
+    public partial class StartAddressForm : Form
     {
-        public test()
+        public StartAddressForm()
         {
             InitializeComponent();
         }
