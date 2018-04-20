@@ -26,6 +26,7 @@ namespace LCS.Logic
          */
         private MainForm mainForm;
 
+        private SetAddressForm setAddressForm;
         /*
          * The total numbers of channels
          */
@@ -146,6 +147,17 @@ namespace LCS.Logic
             initializeDMX();
         }
 
+        public void startSetAddress()
+        {
+         
+            //if all inputs are valid
+            mainForm.Hide();
+            setAddressForm = new SetAddressForm(this);
+            setAddressForm.Show();
+            //when closing the main form, closes the input form
+            
+        }
+
         public void initializeDMX()
         {
             try
@@ -203,6 +215,11 @@ namespace LCS.Logic
                 return true;
             }
             return false;
+        }
+
+        public void hideSetAddressForm()
+        {
+            this.setAddressForm.Hide();
         }
 
         /*

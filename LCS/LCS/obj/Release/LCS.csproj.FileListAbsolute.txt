@@ -34,3 +34,16 @@ C:\Users\laven\Desktop\cse442\newmaster\LCS\LCS\LCS\obj\Debug\LCS.csproj.Generat
 C:\Users\laven\Desktop\cse442\newmaster\LCS\LCS\LCS\obj\Debug\LCS.csproj.CoreCompileInputs.cache
 C:\Users\laven\Desktop\cse442\newmaster\LCS\LCS\LCS\obj\Debug\LCS.exe
 C:\Users\laven\Desktop\cse442\newmaster\LCS\LCS\LCS\obj\Debug\LCS.pdb
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.csprojResolveAssemblyReference.cache
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.Gui.InputForm.resources
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.Gui.MainForm.resources
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.Properties.Resources.resources
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.test.resources
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.csproj.GenerateResource.cache
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.csproj.CoreCompileInputs.cache
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.exe
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.pdb
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\bin\Release\LCS.exe.config
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\bin\Release\LCS.exe
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\bin\Release\LCS.pdb
+C:\Users\AMARU66955\Documents\code\LCS\LCS\LCS\obj\Release\LCS.Gui.SetAddressForm.resources

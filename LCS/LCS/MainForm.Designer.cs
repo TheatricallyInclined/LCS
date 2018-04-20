@@ -347,7 +347,8 @@ namespace LCS.Gui
         {
             this.addressPanel = new Panel();
             this.addressPanel.SuspendLayout();
-            Label startAddressLabel = new Label(); 
+            Label startAddressLabel = new Label();
+            Button setAddressButton;
             // 
             // namePanel
             // 
@@ -371,14 +372,35 @@ namespace LCS.Gui
             startAddressLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             startAddressLabel.AutoSize = false;
             startAddressLabel.TextAlign = ContentAlignment.MiddleCenter;
-            startAddressLabel.Dock = DockStyle.Fill;
+            startAddressLabel.Dock = DockStyle.Top;
             startAddressLabel.Name = "startAddress";
             startAddressLabel.TabIndex = 1;
             startAddressLabel.Text = "Start Address";
+            
+            //
+            //set address button
+            //
+            setAddressButton = new Button();
+            setAddressButton.AutoSize = false;
+            setAddressButton.Dock = DockStyle.Bottom;
+            setAddressButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            setAddressButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+           
+            setAddressButton.Name = "setAddresssButton";
+            setAddressButton.TabIndex = 2;
+            setAddressButton.Text = "Set Address";
 
+            setAddressButton.Click += new System.EventHandler(this.setAdressButton_Click);
+
+            this.addressPanel.Controls.Add(setAddressButton);
             this.addressPanel.Controls.Add(startAddressLabel);
+            
             this.Controls.Add(addressPanel);
+        
         }
+
+
+
 
         private void generateAddFixtureButton()
         {
@@ -414,6 +436,8 @@ namespace LCS.Gui
             exit.Click += new System.EventHandler(this.exitButton_Click);
             this.Controls.Add(exit);
         }
+
+       
 
         private void generateSceneTextPanel(Point location, string text)
         {

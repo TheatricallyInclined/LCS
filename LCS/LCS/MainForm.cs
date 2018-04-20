@@ -139,6 +139,11 @@ namespace LCS.Gui
 
         }
 
+        private void setAdressButton_Click(object sender, EventArgs e)
+        {
+            service.startSetAddress();
+        }
+
         /*
          * exit button onclick listener
          */
