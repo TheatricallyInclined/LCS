@@ -125,6 +125,14 @@ namespace LCS.Logic
             Application.Run(inputForm);
         }
 
+        public void newInputForm()
+        {
+            this.fixtureName = null;
+            this.startAddress = -1;
+            inputForm = new InputForm(this);
+            inputForm.Show();
+        }
+
         /*
          * Hide the input form, open the main form and initialize values for main form
          */
@@ -134,8 +142,15 @@ namespace LCS.Logic
                 //if any input is not valid, return
                 return;
             }
+           
             //if all inputs are valid
+            if(this.fixtureName != null || this.startAddress > 0 || this.numOfChannels > 0)
+            {
+                if(mainForm != null) mainForm.Close();
+            }
+
             inputForm.Hide();
+            
             mainForm = new Gui.MainForm(this, numOfChannels);
             //when closing the main form, closes the input form
             mainForm.Closed += (s, args) => inputForm.Close();
