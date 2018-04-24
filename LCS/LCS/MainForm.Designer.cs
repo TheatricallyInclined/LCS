@@ -137,7 +137,7 @@ namespace LCS.Gui
             //generate components in current and next panel
             for (int i = 0; i < numOfComponents; i++)
             {
-                if(channelNames.Length != 0 && i < channelNames.Length)
+                if(channelNames != null && channelNames.Length != 0 && i < channelNames.Length)
                 {
                     coms[id] = new Component(data, this.currentScenePanel.Controls, id++, channelNames[i]);
                     coms[id] = new Component(data, this.nextScenePanel.Controls, id++, channelNames[i]);
