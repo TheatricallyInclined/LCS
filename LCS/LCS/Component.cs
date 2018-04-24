@@ -54,17 +54,20 @@ namespace LCS.Gui
 
         private const int TICKSPACING = 33;
 
+        private string channelName = null;
+
         /*
          * Constructor method
          * 
          * control: control object that was passed in by MainForm
          * id: the specific id for this component. Uses to determine component location
          */
-        public Component(string[,] data,Control.ControlCollection control, int id)
+        public Component(string[,] data,Control.ControlCollection control, int id, string channelName)
         {
             this.data = data;
             this.control = control;
             this.id = id;
+            this.channelName = channelName;
             calculatePoints();
             generateComponent();
         }
@@ -189,7 +192,14 @@ namespace LCS.Gui
             this.name.BackColor = System.Drawing.SystemColors.ControlDark;
             this.name.TabIndex = 0;
             this.name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.name.Text = "CH " + Convert.ToString(id/2 + 1);
+            if(channelName == null)
+            {
+                this.name.Text = "CH " + Convert.ToString(id / 2 + 1);
+            }
+            else
+            {
+                this.name.Text = this.channelName;
+            }
             this.data[id, 1] = this.name.Text;
             this.name.TextChanged += new System.EventHandler(name_ValueChanged);
             this.control.Add(name);
