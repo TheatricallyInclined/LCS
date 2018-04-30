@@ -130,11 +130,23 @@ namespace LCS.Gui
             generateAddFixtureButton();
             generateExitButton();
             int id = 0;
+            string[] channelNames = null;
+            if (LCS.Lib.LightLibrary.lights.Contains(service.getLightModel())){
+                channelNames = (string[])LCS.Lib.LightLibrary.lights[service.getLightModel()];
+            }
             //generate components in current and next panel
             for (int i = 0; i < numOfComponents; i++)
             {
-                coms[id] = new Component(data, this.currentScenePanel.Controls, id++);
-                coms[id] = new Component(data, this.nextScenePanel.Controls, id++);
+                if(channelNames != null && channelNames.Length != 0 && i < channelNames.Length)
+                {
+                    coms[id] = new Component(data, this.currentScenePanel.Controls, id++, channelNames[i]);
+                    coms[id] = new Component(data, this.nextScenePanel.Controls, id++, channelNames[i]);
+                }
+                else
+                {
+                    coms[id] = new Component(data, this.currentScenePanel.Controls, id++, null);
+                    coms[id] = new Component(data, this.nextScenePanel.Controls, id++, null);
+                }
             }
             new FixtureNameLabel(service, this.namePanel, service.getFxitureName(), service.nextFixtureId());
             addStartAddress(service.getStartAddressAsString(), service.nextFixtureId());
@@ -391,7 +403,7 @@ namespace LCS.Gui
             addFixture.Name = "addFixtureButton";
             addFixture.Size = new System.Drawing.Size(110, 30);
             addFixture.TabIndex = 0;
-            addFixture.Text = "Add Fixture";
+            addFixture.Text = " ";
             addFixture.UseVisualStyleBackColor = true;
             addFixture.Click += new System.EventHandler(this.addFixtureButton_Click);
             addFixture.Enabled = false;

@@ -103,7 +103,8 @@ namespace LCS.Logic
          * True if the app is in time transition mode
          */
         private bool inTransition = false;
-        
+
+        private string lightModel = null;
 
         /*
          * Constructor class
@@ -113,6 +114,7 @@ namespace LCS.Logic
             this.fixtureList = new List<string[,]>();
             startApp();
         }
+
 
         /*
          * Start the application 
@@ -128,12 +130,13 @@ namespace LCS.Logic
         /*
          * Hide the input form, open the main form and initialize values for main form
          */
-        public void startMain() {
+        public void startMain(String lightModel) {
             if(this.fixtureName == null || this.startAddress == -1 || this.numOfChannels == -1)
             {
                 //if any input is not valid, return
                 return;
             }
+            this.lightModel = lightModel;
             //if all inputs are valid
             inputForm.Hide();
             mainForm = new Gui.MainForm(this, numOfChannels);
@@ -437,6 +440,10 @@ namespace LCS.Logic
         public int getPhraseTime() => this.phraseTime;
 
         public bool isInTransition() => this.inTransition;
+
+        public string getLightModel() => this.lightModel;
+
+        public int getChannel() => this.numOfChannels;
     }
 
 }

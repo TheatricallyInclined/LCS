@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using LCS.Lib;
 using LCS.Logic;
 
 namespace LCS.Gui
@@ -69,6 +70,14 @@ namespace LCS.Gui
             this.nameWarningLabel.Visible = false;
             this.addressWarningLabel.Visible = false;
         }
+        /*
+         * index change handler method for drop down list in input form
+         */
+        private void dropDown_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.fixtureName.Text = dropDown.Text;
+            this.channels.Text = ((string[])LightLibrary.lights[dropDown.Text]).Length.ToString();
+        }
 
         /*
          * Onclick method for input button.
@@ -92,7 +101,7 @@ namespace LCS.Gui
             {
                 this.channelWarningLabel.Visible = true;
             }
-            service.startMain();
+            service.startMain(dropDown.Text);
         }
     }
 }
