@@ -51,6 +51,7 @@ namespace LCS.Gui
 
         private const int OTHER_PANEL_WIDTH = 220;
 
+        private ComboBox secLabel;
 
         /// <summary>
         /// Required designer variable.
@@ -214,7 +215,7 @@ namespace LCS.Gui
             switchSceneButton = new Button();
             Label transitionLabel = new Label();
             this.transitionInputBox = new TextBox();
-            Label secLabel = new Label();
+            this.secLabel = new ComboBox();
             this.transitionTimeWarningLabel = new Label();
             this.connectionWarningLabel = new Label();
             // 
@@ -271,7 +272,7 @@ namespace LCS.Gui
             // Transition time inputBox
             // 
             transitionInputBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            transitionInputBox.Location = new System.Drawing.Point(115, 150);
+            transitionInputBox.Location = new System.Drawing.Point(110, 150);
             transitionInputBox.Name = "transitionInputBox";
             transitionInputBox.Size = new System.Drawing.Size(60, 22);
             transitionInputBox.TabIndex = 0;
@@ -291,14 +292,29 @@ namespace LCS.Gui
             // 
             // second label
             // 
-            secLabel.AutoSize = true;
+            /*secLabel.AutoSize = true;
             secLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             secLabel.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             secLabel.Location = new System.Drawing.Point(175, 153);
             secLabel.Name = "secLabel";
             secLabel.Size = new System.Drawing.Size(20, 22);
             secLabel.TabIndex = 1;
-            secLabel.Text = "ms";
+            secLabel.Text = "ms";*/
+            //
+            //drop down list
+            //
+            string[] labels = new string[] {"ms", "s" };
+            this.secLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.secLabel.Items.AddRange(labels);
+            this.secLabel.Location = new System.Drawing.Point(172, 147);
+            this.secLabel.IntegralHeight = false;
+            this.secLabel.MaxDropDownItems = 5;
+            this.secLabel.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.secLabel.Name = "secLabel";
+            this.secLabel.Size = new System.Drawing.Size(38, 20);
+            this.secLabel.TabIndex = 0;
+            this.secLabel.SelectedIndex = 0;
+            //secLabel.SelectedIndexChanged += new System.EventHandler(dropDown_SelectedIndexChanged);
             // 
             // Connection warningLabel
             // 
