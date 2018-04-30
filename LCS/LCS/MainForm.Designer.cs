@@ -403,7 +403,7 @@ namespace LCS.Gui
             addFixture.Name = "addFixtureButton";
             addFixture.Size = new System.Drawing.Size(110, 30);
             addFixture.TabIndex = 0;
-            addFixture.Text = "Add Fixture";
+            addFixture.Text = " ";
             addFixture.UseVisualStyleBackColor = true;
             addFixture.Click += new System.EventHandler(this.addFixtureButton_Click);
             addFixture.Enabled = false;
