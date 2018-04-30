@@ -249,14 +249,21 @@ namespace LCS.Logic
          * set the transition time if the input is valid and return true,
          * otherwise return false
          */
-        public bool setTransitionTime(String time)
+        public bool setTransitionTime(string time, string unit)
         {
             int transitionTime;
             bool valid = int.TryParse(time, out transitionTime);
             // check if the input is valid
             if (valid && transitionTime != 0)
             {
-                this.transitionTime = transitionTime;
+                if ("s".Equals(unit))
+                {
+                    this.transitionTime = transitionTime * 1000;
+                }
+                else
+                {
+                    this.transitionTime = transitionTime;
+                }
                 return true;
             }
             return false;

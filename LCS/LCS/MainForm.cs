@@ -97,7 +97,9 @@ namespace LCS.Gui
             {
                 return;
             }
-            if (!this.service.setTransitionTime(this.transitionInputBox.Text))
+            string unit = this.secLabel.Text;
+
+            if (!this.service.setTransitionTime(this.transitionInputBox.Text, unit))
             {
                 this.transitionTimeWarningLabel.Visible = true;
             }
@@ -130,7 +132,6 @@ namespace LCS.Gui
                 coms[i + 1].setValue(Convert.ToInt32(tempData1), tempData2);
             }
         }
-
         /*
          * Add fixture button onclick listener
          */
