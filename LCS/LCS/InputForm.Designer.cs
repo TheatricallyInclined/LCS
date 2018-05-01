@@ -191,7 +191,7 @@ namespace LCS.Gui
             this.dropDown.MaxDropDownItems = 5;
             this.dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
             this.dropDown.Name = "ComboBox1";
-            this.dropDown.Size = new System.Drawing.Size(80, 50);
+            this.dropDown.Size = new System.Drawing.Size(210, 50);
             this.dropDown.TabIndex = 0;
             this.dropDown.SelectedIndexChanged += new System.EventHandler(dropDown_SelectedIndexChanged);
             // 
