@@ -362,12 +362,12 @@ namespace LCS.Logic
          */
          public void nextPhrase()
         {
-           
-            
-            if (phraseTime == (transitionPhrase-1))
+
+
+            if (transitionPhrase == -1)
             {
                 //there are two phrases if the transitionTime is smaller than transitionPhrase
-                if (currentPhrase >= 1)
+                if (currentPhrase >= transitionData.Count-1)
                 {
                     pingPong = -1;
                 }
@@ -376,20 +376,17 @@ namespace LCS.Logic
                     pingPong = 1;
                 }
             }
-            else if(currentPhrase >= (transitionPhrase-1))
+            else if(currentPhrase >= (transitionData.Count-1))
             {
-                
                     pingPong = -1;
-                
-                    
-               
             }
-            else if (currentPhrase <= 0)
+            else if (currentPhrase == 0)
             {
                 pingPong = 1;
             }
             currentPhrase += pingPong;
-         
+            //Console.WriteLine(currentPhrase + "---" + transitionData.Count);
+
         }
 
         /*
@@ -403,9 +400,10 @@ namespace LCS.Logic
             }
             this.transitionData = new List<int[]>(transitionPhrase);
             //calculate phraseTime
-            this.phraseTime = transitionTime / transitionPhrase;
+            //this.phraseTime = transitionTime / transitionPhrase;
+            this.phraseTime = 100;
             //if transition time is less than or equal to the phrase, only have two phrases for the transition
-            if (phraseTime <= transitionPhrase)
+            if (transitionPhrase == -1)
             {
                 phraseTime = transitionPhrase;
                 transitionData.Add(currentSceneValue);

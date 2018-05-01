@@ -173,7 +173,7 @@ namespace LCS.Gui
             this.inputLabel4.AutoSize = true;
             this.inputLabel4.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputLabel4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.inputLabel4.Location = new System.Drawing.Point(107, 15);
+            this.inputLabel4.Location = new System.Drawing.Point(70, 15);
             this.inputLabel4.Name = "inputLabel4";
             this.inputLabel4.Size = new System.Drawing.Size(100, 22);
             this.inputLabel4.TabIndex = 1;
@@ -186,12 +186,12 @@ namespace LCS.Gui
             string[] lightModels = new string[coll.Count];
             coll.CopyTo(lightModels, 0);
             dropDown.Items.AddRange(lightModels);
-            this.dropDown.Location = new System.Drawing.Point(264, 15);
+            this.dropDown.Location = new System.Drawing.Point(227, 15);
             this.dropDown.IntegralHeight = false;
             this.dropDown.MaxDropDownItems = 5;
             this.dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
             this.dropDown.Name = "ComboBox1";
-            this.dropDown.Size = new System.Drawing.Size(210, 50);
+            this.dropDown.Size = new System.Drawing.Size(180, 50);
             this.dropDown.TabIndex = 0;
             this.dropDown.SelectedIndexChanged += new System.EventHandler(dropDown_SelectedIndexChanged);
             // 
