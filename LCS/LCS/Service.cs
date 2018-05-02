@@ -103,7 +103,13 @@ namespace LCS.Logic
          * True if the app is in time transition mode
          */
         private bool inTransition = false;
+
+        private string lightModel = null;
         
+         private int pingPong = 1;
+        /*
+         * This variable states whether or not the next phase array moves forward or backward
+         * /
 
         /*
          * Constructor class
@@ -113,6 +119,7 @@ namespace LCS.Logic
             this.fixtureList = new List<string[,]>();
             startApp();
         }
+
 
         /*
          * Start the application 
@@ -128,12 +135,13 @@ namespace LCS.Logic
         /*
          * Hide the input form, open the main form and initialize values for main form
          */
-        public void startMain() {
+        public void startMain(String lightModel) {
             if(this.fixtureName == null || this.startAddress == -1 || this.numOfChannels == -1)
             {
                 //if any input is not valid, return
                 return;
             }
+            this.lightModel = lightModel;
             //if all inputs are valid
             inputForm.Hide();
             mainForm = new Gui.MainForm(this, numOfChannels);
@@ -246,14 +254,21 @@ namespace LCS.Logic
          * set the transition time if the input is valid and return true,
          * otherwise return false
          */
-        public bool setTransitionTime(String time)
+        public bool setTransitionTime(string time, string unit)
         {
             int transitionTime;
             bool valid = int.TryParse(time, out transitionTime);
             // check if the input is valid
             if (valid && transitionTime != 0)
             {
-                this.transitionTime = transitionTime;
+                if ("s".Equals(unit))
+                {
+                    this.transitionTime = transitionTime * 1000;
+                }
+                else
+                {
+                    this.transitionTime = transitionTime;
+                }
                 return true;
             }
             return false;
@@ -345,21 +360,33 @@ namespace LCS.Logic
         /*
          * Update current phrase of the transition to next phrase
          */
-        public void nextPhrase()
+         public void nextPhrase()
         {
-            currentPhrase++;
-            if(phraseTime == transitionPhrase)
+
+
+            if (transitionPhrase == -1)
             {
                 //there are two phrases if the transitionTime is smaller than transitionPhrase
-                if (currentPhrase >= 2)
+                if (currentPhrase >= transitionData.Count-1)
                 {
-                    currentPhrase = 0;
+                    pingPong = -1;
+                }
+                else if (currentPhrase==0)
+                {
+                    pingPong = 1;
                 }
             }
-            else if(currentPhrase >= transitionPhrase)
+            else if(currentPhrase >= (transitionData.Count-1))
             {
-                currentPhrase = 0;
+                    pingPong = -1;
             }
+            else if (currentPhrase == 0)
+            {
+                pingPong = 1;
+            }
+            currentPhrase += pingPong;
+            //Console.WriteLine(currentPhrase + "---" + transitionData.Count);
+
         }
 
         /*
@@ -373,9 +400,10 @@ namespace LCS.Logic
             }
             this.transitionData = new List<int[]>(transitionPhrase);
             //calculate phraseTime
-            this.phraseTime = transitionTime / transitionPhrase;
+            //this.phraseTime = transitionTime / transitionPhrase;
+            this.phraseTime = 100;
             //if transition time is less than or equal to the phrase, only have two phrases for the transition
-            if (phraseTime <= transitionPhrase)
+            if (transitionPhrase == -1)
             {
                 phraseTime = transitionPhrase;
                 transitionData.Add(currentSceneValue);
@@ -437,6 +465,10 @@ namespace LCS.Logic
         public int getPhraseTime() => this.phraseTime;
 
         public bool isInTransition() => this.inTransition;
+
+        public string getLightModel() => this.lightModel;
+
+        public int getChannel() => this.numOfChannels;
     }
 
 }

@@ -1,4 +1,8 @@
-﻿namespace LCS.Gui
+﻿using System.Collections;
+using System.Windows.Forms;
+using LCS.Lib;
+
+namespace LCS.Gui
 {
 
    /*
@@ -40,6 +44,7 @@
             this.inputLabel1 = new System.Windows.Forms.Label();
             this.inputLabel2 = new System.Windows.Forms.Label();
             this.inputLabel3 = new System.Windows.Forms.Label();
+            this.inputLabel4 = new System.Windows.Forms.Label();
             this.inputButton = new System.Windows.Forms.Button();
             this.channelWarningLabel = new System.Windows.Forms.Label();
             this.nameWarningLabel = new System.Windows.Forms.Label();
@@ -49,7 +54,7 @@
             // fixture name inputBox
             // 
             this.fixtureName.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.fixtureName.Location = new System.Drawing.Point(264, 20);
+            this.fixtureName.Location = new System.Drawing.Point(264, 65);
             this.fixtureName.Name = "fixtureName";
             this.fixtureName.Size = new System.Drawing.Size(80, 22);
             this.fixtureName.TabIndex = 0;
@@ -59,7 +64,7 @@
             // startAddress inputBox
             // 
             this.startAddress.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.startAddress.Location = new System.Drawing.Point(270, 70);
+            this.startAddress.Location = new System.Drawing.Point(270, 115);
             this.startAddress.MaxLength = 3;
             this.startAddress.Name = "fixtureName";
             this.startAddress.Size = new System.Drawing.Size(80, 22);
@@ -70,7 +75,7 @@
             // channels inputBox
             // 
             this.channels.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.channels.Location = new System.Drawing.Point(300, 120);
+            this.channels.Location = new System.Drawing.Point(300, 165);
             this.channels.MaxLength = 3;
             this.channels.Name = "fixtureName";
             this.channels.Size = new System.Drawing.Size(80, 22);
@@ -82,7 +87,7 @@
             // input button
             // 
             this.inputButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.inputButton.Location = new System.Drawing.Point(180, 170);
+            this.inputButton.Location = new System.Drawing.Point(180, 215);
             this.inputButton.Name = "button1";
             this.inputButton.Size = new System.Drawing.Size(100, 35);
             this.inputButton.TabIndex = 0;
@@ -96,7 +101,7 @@
             this.inputLabel1.AutoSize = true;
             this.inputLabel1.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputLabel1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.inputLabel1.Location = new System.Drawing.Point(107, 20);
+            this.inputLabel1.Location = new System.Drawing.Point(107, 65);
             this.inputLabel1.Name = "inputLabel1";
             this.inputLabel1.Size = new System.Drawing.Size(200, 30);
             this.inputLabel1.TabIndex = 1;
@@ -108,7 +113,7 @@
             this.inputLabel2.AutoSize = true;
             this.inputLabel2.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputLabel2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.inputLabel2.Location = new System.Drawing.Point(100, 70);
+            this.inputLabel2.Location = new System.Drawing.Point(100, 115);
             this.inputLabel2.Name = "inputLabel2";
             this.inputLabel2.Size = new System.Drawing.Size(200, 30);
             this.inputLabel2.TabIndex = 1;
@@ -120,7 +125,7 @@
             this.inputLabel3.AutoSize = true;
             this.inputLabel3.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.inputLabel3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.inputLabel3.Location = new System.Drawing.Point(80, 120);
+            this.inputLabel3.Location = new System.Drawing.Point(80, 165);
             this.inputLabel3.Name = "inputLabel3";
             this.inputLabel3.Size = new System.Drawing.Size(200, 30);
             this.inputLabel3.TabIndex = 1;
@@ -132,7 +137,7 @@
             this.channelWarningLabel.AutoSize = true;
             this.channelWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.channelWarningLabel.ForeColor = System.Drawing.Color.Red;
-            this.channelWarningLabel.Location = new System.Drawing.Point(88, 150);
+            this.channelWarningLabel.Location = new System.Drawing.Point(88, 195);
             this.channelWarningLabel.Name = "channelWarningLabel";
             this.channelWarningLabel.Size = new System.Drawing.Size(273, 30);
             this.channelWarningLabel.TabIndex = 1;
@@ -144,7 +149,7 @@
             this.nameWarningLabel.AutoSize = true;
             this.nameWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameWarningLabel.ForeColor = System.Drawing.Color.Red;
-            this.nameWarningLabel.Location = new System.Drawing.Point(125, 50);
+            this.nameWarningLabel.Location = new System.Drawing.Point(125, 95);
             this.nameWarningLabel.Name = "nameWarningLabel";
             this.nameWarningLabel.Size = new System.Drawing.Size(273, 30);
             this.nameWarningLabel.TabIndex = 1;
@@ -156,12 +161,39 @@
             this.addressWarningLabel.AutoSize = true;
             this.addressWarningLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addressWarningLabel.ForeColor = System.Drawing.Color.Red;
-            this.addressWarningLabel.Location = new System.Drawing.Point(88, 100);
+            this.addressWarningLabel.Location = new System.Drawing.Point(88, 145);
             this.addressWarningLabel.Name = "addressWarningLabel";
             this.addressWarningLabel.Size = new System.Drawing.Size(273, 30);
             this.addressWarningLabel.TabIndex = 1;
             this.addressWarningLabel.Text = "Please enter a valid address between 1 and " + service.getMaxAddress().ToString();
             this.addressWarningLabel.Visible = false;
+            // 
+            // Light Model label
+            // 
+            this.inputLabel4.AutoSize = true;
+            this.inputLabel4.Font = new System.Drawing.Font("Papyrus", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.inputLabel4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.inputLabel4.Location = new System.Drawing.Point(70, 15);
+            this.inputLabel4.Name = "inputLabel4";
+            this.inputLabel4.Size = new System.Drawing.Size(100, 22);
+            this.inputLabel4.TabIndex = 1;
+            this.inputLabel4.Text = "Light Model:";
+            //
+            //drop down list
+            //
+            this.dropDown = new System.Windows.Forms.ComboBox();
+            ICollection coll = LightLibrary.lights.Keys;
+            string[] lightModels = new string[coll.Count];
+            coll.CopyTo(lightModels, 0);
+            dropDown.Items.AddRange(lightModels);
+            this.dropDown.Location = new System.Drawing.Point(227, 15);
+            this.dropDown.IntegralHeight = false;
+            this.dropDown.MaxDropDownItems = 5;
+            this.dropDown.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.dropDown.Name = "ComboBox1";
+            this.dropDown.Size = new System.Drawing.Size(180, 50);
+            this.dropDown.TabIndex = 0;
+            this.dropDown.SelectedIndexChanged += new System.EventHandler(dropDown_SelectedIndexChanged);
             // 
             // InputForm
             // 
@@ -169,10 +201,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             //this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(50)))));
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(475, 225);
+            this.ClientSize = new System.Drawing.Size(475, 265);
             this.Controls.Add(this.inputLabel1);
             this.Controls.Add(this.inputLabel2);
             this.Controls.Add(this.inputLabel3);
+            this.Controls.Add(this.inputLabel4);
+            this.Controls.Add(this.dropDown);
             this.Controls.Add(this.fixtureName);
             this.Controls.Add(this.startAddress);
             this.Controls.Add(this.channels);
@@ -201,9 +235,11 @@
         private System.Windows.Forms.Label inputLabel1;
         private System.Windows.Forms.Label inputLabel2;
         private System.Windows.Forms.Label inputLabel3;
+        private System.Windows.Forms.Label inputLabel4;
         private System.Windows.Forms.Button inputButton;
         private System.Windows.Forms.Label channelWarningLabel;
         private System.Windows.Forms.Label nameWarningLabel;
         private System.Windows.Forms.Label addressWarningLabel;
+        private System.Windows.Forms.ComboBox dropDown;
     }
 }

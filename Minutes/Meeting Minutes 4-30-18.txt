@@ -1,0 +1,20 @@
+Team: Theatrically Inclined
+Date: 4/30/18
+Time: 6-7pm
+Attendance: All Present
+
+Discussion:
+How to Implement Seconds for timed transitions
+100 level feature requests
+Official release video
+
+Accomplished Since Last Meeting: 
+Alex: combed 100 level feature requests and made action report
+Zack: found common light profiles to populate fixture library
+Rong: made fixture library framework
+
+Plan to Accomplish: 
+Alex: Official release video
+Zack: populate fixture library
+Rong: Second/MS dropdown
+
